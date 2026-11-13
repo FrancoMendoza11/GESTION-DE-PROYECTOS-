@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Gestor de Estudio - Gestión de Proyectos</title>
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --text-color: #333;
+            --sidebar-bg: #2c3e50;
+            --sidebar-text: #ecf0f1;
+            --accent-color: #3498db;
+            --card-bg: #fff;
+            --card-border: #e0e0e0;
+            --hover-bg: #e8f4f8;
+        }
+
+        .dark-mode {
+            --bg-color: #1a1a2e;
+            --text-color: #e0e0e0;
+            --sidebar-bg: #0f3460;
+            --sidebar-text: #e0e0e0;
+            --accent-color: #e94560;
+            --card-bg: #16213e;
+            --card-border: #0f3460;
+            --hover-bg: #1a1a2e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+            overflow: hidden;
+        }
+
+        /* --- ESTILOS DESKTOP --- */
+        .sidebar {
+            width: 300px;
+            background-color: var(--sidebar-bg);
+            color: var(--sidebar-text);
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+            transition: background-color 0.3s;
+            z-index: 10;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            padding: 0 15px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #fff;
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            color: var(--sidebar-text);
+            padding: 15px 20px;
+            text-align: left;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            width: 100%;
+            border-left: 4px solid transparent;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--card-border);
+            z-index: 5;
+        }
+
+        .search-bar {
+            padding: 10px 15px;
+            border-radius: 20px;
+            border: 1px solid var(--card-border);
+            width: 100%;
+            max-width: 400px;
+            outline: none;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-size: 0.95rem;
+        }
+
+        .theme-toggle {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            white-space: nowrap;
+            margin-left: 10px;
+        }
+
+        .content-area {
+            padding: 20px;
+            overflow-y: auto;
+            flex: 1;
+            scroll-behavior: smooth;
+        }
+
+        /* Tarjetas y Acordeones */
+        .topic-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        details {
+            padding: 15px;
+            cursor: pointer;
+        }
+
+        summary {
+            font-weight: bold;
+            font-size: 1.05rem;
+            color: var(--accent-color);
+            outline: none;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        summary::-webkit-details-marker { display: none; }
+        
+        summary::after {
+            content: '+';
+            font-size: 1.3rem;
+            color: var(--text-color);
+        }
+
+        details[open] summary::after {
+            content: '-';
+        }
+
+        .details-content {
+            margin-top: 15px;
+            line-height: 1.6;
+            padding-left: 10px;
+            border-left: 2px solid var(--accent-color);
+            font-size: 0.95rem;
+        }
+
+        .details-content p {
+            margin-bottom: 10px;
+        }
+
+        .details-content ul, .details-content ol {
+            margin-left: 20px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .details-content li {
+            margin-bottom: 8px;
+        }
+
+        .highlight {
+            background-color: rgba(52, 152, 219, 0.2);
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        /* --- ESTILOS MOBILE (Celulares y Tablets) --- */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+                height: auto;
+                min-height: 100vh;
+                overflow: auto;
+            }
+
+            .sidebar {
+                width: 100%;
+                padding: 10px 0;
+                flex-direction: row;
+                align-items: center;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            
+            .sidebar::-webkit-scrollbar {
+                display: none;
+            }
+
+            .sidebar h2 {
+                display: none;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                padding: 0 10px;
+            }
+
+            .nav-btn {
+                padding: 10px 15px;
+                width: auto;
+                border-left: none;
+                border-bottom: 3px solid transparent;
+                font-size: 0.9rem;
+                border-radius: 20px;
+            }
+
+            .nav-btn:hover, .nav-btn.active {
+                border-left: none;
+                border-bottom: 3px solid var(--accent-color);
+                background-color: transparent;
+            }
+
+            .main-content {
+                overflow: visible;
+            }
+
+            header {
+                flex-direction: row;
+                padding: 10px 15px;
+                position: sticky;
+                top: 0;
+            }
+
+            .search-bar {
+                font-size: 0.9rem;
+                padding: 8px 12px;
+            }
+
+            .theme-toggle {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+
+            .content-area {
+                padding: 15px;
+                overflow-y: visible;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <h2>📚 Gestión de Proyectos</h2>
+        <div class="nav-menu">
+            <button class="nav-btn active" onclick="loadTopic('reingenieria', this)">🔄 Reingeniería</button>
+            <button class="nav-btn" onclick="loadTopic('calidad', this)">⭐ Calidad</button>
+            <button class="nav-btn" onclick="loadTopic('gestion', this)">💻 Gestión IT</button>
+            <button class="nav-btn" onclick="loadTopic('rts', this)">⏱️ T. Real (RTS)</button>
+            <button class="nav-btn" onclick="loadTopic('costos', this)">💰 Costos</button>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header>
+            <input type="text" id="searchInput" class="search-bar" placeholder="Buscar concepto..." onkeyup="searchContent()">
+            <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+        </header>
+
+        <div class="content-area" id="contentArea">
+            <!-- El contenido se carga dinámicamente aquí -->
+        </div>
+    </main>
+
+    <script>
+        const apuntes = {
+            reingenieria: {
+                titulo: "Reingeniería de Software",
+                temas: [
+                    { 
+                        titulo: "El Concepto: ¿Qué es realmente?", 
+                        contenido: `
+                            <p>La reingeniería <b>NO</b> es un simple mantenimiento o parche. Según Michael Hammer y James Champy:</p>
+                            <blockquote style="font-style: italic; border-left: 3px solid var(--accent-color); padding-left: 10px; margin: 10px 0;">
+                                "En lugar de incrustar procesos caducos en silicio y software, debemos eliminarlos y comenzar de nuevo. Debemos 'reingeniar' nuestras empresas usando el poder de la tecnología para <b>rediseñar radicalmente</b> los procesos empresariales para lograr <b>mejoras dramáticas</b> en su rendimiento."
+                            </blockquote>
+                            <p>En el contexto de software, significa agarrar un sistema viejo (Legacy), analizar su funcionamiento interno (aunque no haya documentación) y reconstruirlo desde cero con tecnología moderna para que sea más rápido, barato de mantener y de mejor calidad.</p>
+                        `
+                    },
+                    { 
+                        titulo: "¿Por qué es necesaria? (Leyes de Lehman)", 
+                        contenido: `
+                            <p>El software que se usa en el mundo real evoluciona. Meir M. Lehman estableció leyes que explican por qué los sistemas se vuelven obsoletos:</p>
+                            <ul>
+                                <li><b>Complejidad creciente:</b> A medida que un sistema evoluciona, su complejidad aumenta, a menos que se haga trabajo para mantenerlo o reducirlo (se vuelve "código espagueti").</li>
+                                <li><b>Crecimiento continuo:</b> El contenido funcional debe aumentar continuamente para mantener la satisfacción del cliente.</li>
+                                <li><b>Declive de la calidad:</b> La calidad del sistema declinará a menos que se mantenga y adapte a los cambios del entorno.</li>
+                            </ul>
+                        `
+                    },
+                    { 
+                        titulo: "Conceptos Previos: Mantenibilidad y Soportabilidad", 
+                        contenido: `
+                            <p>Para que un software sea un buen candidato a reingeniería (o para que no necesite una con urgencia), debe tener:</p>
+                            <ul>
+                                <li><b>Mantenibilidad:</b> Posee modularidad adecuada, patrones de diseño establecidos, convenciones de codificación bien definidas, código comprensible y auto-documentado, y se somete a revisiones de calidad.</li>
+                                <li><b>Soportabilidad:</b> Dar soporte implica todas las tareas requeridas para mantener en adecuado funcionamiento el producto liberado.</li>
+                            </ul>
+                        `
+                    },
+                    { 
+                        titulo: "Las 6 Actividades de la Reingeniería", 
+                        contenido: `
+                            <ol>
+                                <li><b>Análisis de Inventario:</b> Es un censo. Una lista con descripción detallada de cada producto activo (funciones, impacto, fecha, tamaño, importancia, mantenibilidad).</li>
+                                <li><b>Reestructuración de Documentos:</b> Revisión, reformulación o creación de la documentación existente y ajustarla a las actualizaciones.</li>
+                                <li><b>Ingeniería Inversa:</b> El corazón del proceso. Es recuperar el diseño analizando el programa para construir una representación de mayor nivel de abstracción (ej. de código a UML). <i>A mayor nivel de abstracción, mejora la comprensión.</i></li>
+                                <li><b>Reestructuración de Código:</b> Revisar y re-estructurar el código fuente para que produzca la misma o más funcionalidad con mejor calidad, sin cambiar lo que hace.</li>
+                                <li><b>Reestructuración de Datos:</b> Disecar y reformular los modelos de datos existentes, revisando la calidad de las estructuras y su soporte.</li>
+                                <li><b>Ingeniería hacia Adelante:</b> Recuperar el diseño del software existente para <b>reconstruirlo</b> mejorando su calidad global, añadiendo nuevas funciones y mejorando el rendimiento.</li>
+                            </ol>
+                        `
+                    },
+                    { 
+                        titulo: "¿Cuándo tomar la decisión?", 
+                        contenido: `
+                            <p>Re-desarrollar un producto que funciona parece una locura, pero se justifica por:</p>
+                            <ul>
+                                <li>Mantener una línea de código vieja es <b>varias veces más caro</b> que desarrollarla nuevamente.</li>
+                                <li>El diseño con nuevas herramientas facilita el mantenimiento futuro (cambio de arquitectura).</li>
+                                <li>Ya existe un prototipo (el sistema viejo), por lo cual la productividad de desarrollo es superior.</li>
+                            </ul>
+                            <p class="highlight">Regla de oro: Se hace reingeniería cuando el costo esperado de mantenimiento del producto re-ingenierizado (más el costo del proceso) es INFERIOR al costo esperado de mantener el producto vigente por su vida útil.</p>
+                        `
+                    }
+                ]
+            },
+            calidad: {
+                titulo: "Calidad de Software",
+                temas: [
+                    {
+                        titulo: "El Dilema de la Calidad y su Definición",
+                        contenido: `
+                            <p><b>Definición:</b> "Calidad es concordancia con las especificaciones".</p>
+                            <p><b>El dilema de la industria:</b> Si producimos un producto de baja calidad, nadie lo aceptará. Si aplicamos un esfuerzo excesivo tendiente a la perfección, el producto será tan caro que quedará fuera del mercado. Se debe buscar el equilibrio.</p>
+                            <p>Desde el desarrollo se distinguen tres elementos que requieren asegurar la calidad:</p>
+                            <ul>
+                                <li><b>Procesos:</b> Métodos o procedimientos aplicados durante la construcción.</li>
+                                <li><b>Productos:</b> Entregables. Versiones. Documentos.</li>
+                                <li><b>Recursos:</b> Elementos necesarios (incluidos RRHH).</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        titulo: "Ciclo de Mejora del Proceso",
+                        contenido: `
+                            <p>Un proceso eficaz de software establece la infraestructura que da apoyo a cualquier esfuerzo de elaboración de un producto de calidad. Comprende: Tecnologías de desarrollo, Métodos y Técnicas, Comportamiento organizacional, y Economía/Gestión.</p>
+                            <p>El ciclo consta de 4 pasos:</p>
+                            <ol>
+                                <li><b>Definir el proceso:</b> Documentarlo adecuadamente para permitir la mejora constante.</li>
+                                <li><b>Ejecutar el proceso:</b> Debe monitorearse en cada momento para que no se aparte de lo definido.</li>
+                                <li><b>Medir el proceso:</b> Solo una adecuada medición permite cuantificar una mejora.</li>
+                                <li><b>Mejorar el proceso:</b> Medir y mejorar van de la mano.</li>
+                            </ol>
+                        `
+                    },
+                    {
+                        titulo: "Puntos de vista de la Calidad",
+                        contenido: `
+                            <ul>
+                                <li><b>Calidad Interna:</b> Se especifica para los elementos que se construyen (arquitectura, estructura, interfaces, diseño, codificación).</li>
+                                <li><b>Calidad Externa:</b> Se determina en los requisitos. Deben ser visibles externamente. Es la del producto entregado en un entorno simulado, verificada con métricas.</li>
+                                <li><b>Calidad en Uso:</b> La previsible en base a la calidad interna/externa, pero finalmente es la <b>percepción que se forma el usuario</b>.</li>
+                            </ul>
+                            <p>Se debe distinguir entre calidad estimada (predicha) y real (verificada).</p>
+                        `
+                    },
+                    {
+                        titulo: "Características Evaluables (ISO 9126)",
+                        contenido: `
+                            <ul>
+                                <li><b>Funcionalidad:</b> Proporcionar funciones que satisfagan necesidades (Adecuación, Exactitud, Interoperabilidad, Seguridad, Conformidad).</li>
+                                <li><b>Confiabilidad:</b> Mantener rendimiento adecuado (Madurez, Tolerancia a fallas, Recuperabilidad).</li>
+                                <li><b>Usabilidad:</b> Capacidad de ser entendido, usado y aprendido (Comprensibilidad, Facilidad de aprendizaje, Operabilidad, Atracción).</li>
+                                <li><b>Eficiencia:</b> Rendimiento adecuado relativo a los recursos usados (Comportamiento temporal, Utilización de recursos).</li>
+                                <li><b>Mantenibilidad:</b> Capacidad para ser modificado (Analizabilidad, Cambiabilidad, Estabilidad, Facilidad de prueba).</li>
+                                <li><b>Portabilidad:</b> Capacidad de transferirse de un entorno a otro (Adaptabilidad, Facilidad de instalación, Coexistencia, Reemplazabilidad).</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        titulo: "Gestión y Aseguramiento (CMMI)",
+                        contenido: `
+                            <p><b>Gestión de la calidad:</b> Procura satisfacer los requerimientos de calidad establecidos (Plan, Control, Asegurar).</p>
+                            <p><b>Aseguramiento de la Calidad (QA):</b> Funciones de auditoría y reportes para evaluar la eficacia. Audita los requisitos y resultados de mediciones. Usa herramientas como Diagramas Causa-Efecto y Gráficos de Pareto para identificar causas de fallas.</p>
+                            <p><b>CMMI:</b> Conjunto de normas y procedimientos que proporcionan un marco para mejores productos y procesos. Se divide en Niveles de Madurez:</p>
+                            <ul>
+                                <li>Nivel 1: Procesos ad-hoc y caóticos.</li>
+                                <li>Nivel 2: Procesos planificados, documentados y controlados.</li>
+                                <li>Nivel 3: Procesos estandarizados y detallados.</li>
+                                <li>Nivel 4: Procesos cuantitativamente predecibles.</li>
+                                <li>Nivel 5: Mejora continua basada en causas de variación.</li>
+                            </ul>
+                        `
+                    }
+                ]
+            },
+            gestion: {
+                titulo: "Gestión IT",
+                temas: [
+                    {
+                        titulo: "Sistemas y Empresa",
+                        contenido: `
+                            <p><b>Sistema:</b> Conjunto de elementos interconectados para alcanzar un objetivo dado (Estructura y Comportamiento).</p>
+                            <p><b>Sistema de Información:</b> Especializa el objetivo al tratamiento de la Información. Involucra la intersección de Personas, Tecnologías y Procesos.</p>
+                            <p><b>Síntomas de mal funcionamiento:</b> Funcionales (inconsistencias operativas), Psicológicos (sorpresas/fallas de comunicación) y de Contenido (inconsistencias en informes).</p>
+                        `
+                    },
+                    {
+                        titulo: "Aplicaciones Empresariales (ERP)",
+                        contenido: `
+                            <p><b>ERP (Enterprise Resource Planning):</b> Producto de software que cubre todas las operaciones de la compañía. Compuesto por módulos integrados que buscan una visión integral de la empresa.</p>
+                            <ul>
+                                <li><b>Beneficios:</b> Distribuye información (un dato se incorpora una vez), incorpora buenas prácticas, permisos por función, historial de cambios.</li>
+                                <li><b>Costos Visibles:</b> Hardware, Software (licencias), Implementación, Capacitación, Consultoría.</li>
+                                <li><b>Costos Ocultos:</b> Dificultad de integración con procesos, desatención de capacitación, dependencia de consultores, "depresión post-ERP" (problemas con la nueva forma de operar).</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        titulo: "Estrategia IT: Táctico vs Estratégico",
+                        contenido: `
+                            <ul>
+                                <li><b>Sistemas Tácticos:</b> Automatizan procesos internos. Buscan mejoras cuantitativas (reducir costos, aumentar productividad). "Hacer las cosas mejor". El área de sistemas es un centro de costos.</li>
+                                <li><b>Sistemas Estratégicos:</b> Dirigidos al entorno. Buscan ventajas competitivas, mejoras cualitativas e intangibles. "Hacer mejores cosas". El área de sistemas es un centro de resultados (inversión).</li>
+                            </ul>
+                            <p><b>Outsourcing:</b> Transferir a un proveedor una o todas las actividades de un proceso de negocios. Cuidado con los costos ocultos (búsqueda del vendedor, transición, administración de la relación).</p>
+                        `
+                    }
+                ]
+            },
+            rts: {
+                titulo: "Sistemas de Tiempo Real (RTS)",
+                temas: [
+                    {
+                        titulo: "Definiciones Fundamentales",
+                        contenido: `
+                            <p>A diferencia de los sistemas de propósito general, los RTS están destinados a monitorear, interactuar, controlar o responder a un entorno físico.</p>
+                            <p><b>Definición formal:</b> El tiempo en que la respuesta es entregada es tan importante como la correctitud de la respuesta. Las consecuencias de una respuesta tardía son tan peligrosas como una respuesta incorrecta.</p>
+                            <ul>
+                                <li><b>RTS Blando (Soft):</b> Su funcionamiento se degrada si no cumple la especificación temporal (ej. cámaras de vigilancia, streaming).</li>
+                                <li><b>RTS Duro (Hard):</b> Su funcionamiento es <b>incorrecto</b> si no cumple el tiempo (ej. Airbag, frenos ABS, aviónica).</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        titulo: "Estímulos y Sistemas Embebidos",
+                        contenido: `
+                            <p><b>Clasificación según estímulos:</b></p>
+                            <ul>
+                                <li><b>Periódicos:</b> Ocurren a intervalos predecibles (ej. sensor de temperatura).</li>
+                                <li><b>Aperiódicos:</b> Ocurren de forma irregular (ej. activación de Airbag).</li>
+                            </ul>
+                            <p><b>Sistemas Embebidos:</b> Dispositivo informático que forma parte de un sistema mayor, cuya presencia no es obvia para el usuario (Caja Negra). Ej: Motores de autos, lavarropas. Casi siempre ejecutan RTOS (Real Time Operating Systems) que minimizan la latencia.</p>
+                        `
+                    },
+                    {
+                        titulo: "Diseño y Caso Práctico (ABS)",
+                        contenido: `
+                            <p>En etapas tempranas se deben identificar estímulos y respuestas, restricciones temporales, elegir plataforma y diseñar la planificación (scheduling). Los lenguajes comunes son C, C++ y Ada.</p>
+                            <p><b>Ejercicio (Sistema ABS - Anti Lock Breaking):</b></p>
+                            <ul>
+                                <li><b>Requerimientos:</b> El vehículo debe disminuir velocidad; las ruedas no deben bloquearse.</li>
+                                <li><b>Sensores:</b> Sensores de velocidad de rueda.</li>
+                                <li><b>Eventos:</b> Detección de bloqueo inminente de rueda.</li>
+                                <li><b>Actuadores:</b> Válvulas hidráulicas de freno.</li>
+                                <li><b>Algoritmo:</b> Si la rueda se frena bruscamente, liberar presión hidráulica para que gire, y volver a frenar.</li>
+                            </ul>
+                        `
+                    }
+                ]
+            },
+            costos: {
+                titulo: "Gestión de Costos",
+                temas: [
+                    {
+                        titulo: "Definición y Tipificación",
+                        contenido: `
+                            <p><b>Costo:</b> Desembolso presente, pasado o futuro, real o virtual, aplicable a la creación/explotación de valor.</p>
+                            <p>Se clasifican según:</p>
+                            <ul>
+                                <li><b>Período:</b> Corrientes (se pagan en el ciclo), Previstos (antes de producirse), Diferidos (se producen antes de asignarse), Hundidos (ya realizados, no recuperables).</li>
+                                <li><b>Imputación:</b> Directos (asignación directa) e Indirectos (requieren criterio de distribución).</li>
+                                <li><b>Variabilidad:</b> Variables (dependen del volumen), Fijos (independientes) y Semifijos (fijos en tramos).</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        titulo: "Asignación y Amortización",
+                        contenido: `
+                            <p><b>Centro de Costo:</b> Recibe erogaciones que luego distribuye a los bienes/servicios conforme a una base de distribución.</p>
+                            <p><b>COSTO TOTAL DE USO (OTC):</b></p>
+                            <p class="highlight">OTC = Inversión Inicial + (Costo periódico recurrente × Cantidad de períodos de vida útil)</p>
+                            <p><b>Amortizar:</b> Es la disminución proporcional del valor de un activo a medida que avanza su vida útil. (Ej: Servidor de u$s 10.000 con vida de 4 años = u$s 2.500 de costo por año).</p>
+                        `
+                    },
+                    {
+                        titulo: "Estimación y Control",
+                        contenido: `
+                            <ul>
+                                <li><b>Bottom-up:</b> Se centra en datos detallados de cada unidad de la EDT y se agregan hacia arriba. Muy preciso pero lento.</li>
+                                <li><b>Top-down (Paramétrico):</b> Usa información histórica y métricas (ej. Hs x Punto Función) aplicadas a las características del proyecto. Rápido pero menos preciso.</li>
+                            </ul>
+                            <p><b>Control de costos:</b> Comparar costo estimado vs real. Al detectar desvíos, identificar la naturaleza: Ejecución deficiente (revisar ejecución), Estimación deficiente (revisar método) o Exógenos (factores externos no controlables).</p>
+                        `
+                    },
+                    {
+                        titulo: "Análisis de Costos",
+                        contenido: `
+                            <p>Para la toma de decisiones solo se contemplan costos variables y fijos.</p>
+                            <ul>
+                                <li><b>Precio de Venta Neto:</b> Valor unitario neto de financiación.</li>
+                                <li><b>Contribución Marginal:</b> Precio de Venta Neto - Costos Variables. Es el valor unitario que queda para cubrir costos fijos.</li>
+                                <li><b>Punto de Equilibrio:</b> Cantidad de unidades que cubren los costos fijos totales. (Costos Fijos Totales / Contribución Marginal Unitaria).</li>
+                            </ul>
+                            <p><i>Cuidado:</i> No discontinuar productos que no generan ganancia si aportan una buena contribución marginal para cubrir los costos fijos de la empresa.</p>
+                        `
+                    }
+                ]
+            }
+        };
+
+        function loadTopic(topicKey, btnElement) {
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            if (btnElement) btnElement.classList.add('active');
+
+            const data = apuntes[topicKey];
+            const contentArea = document.getElementById('contentArea');
+            
+            let html = `<h1 style="margin-bottom: 20px; font-size: 1.5rem;">${data.titulo}</h1>`;
+
+            data.temas.forEach((tema, index) => {
+                html += `
+                    <div class="topic-card">
+                        <details ${index === 0 ? 'open' : ''}>
+                            <summary>${tema.titulo}</summary>
+                            <div class="details-content">
+                                ${tema.contenido}
+                            </div>
+                        </details>
+                    </div>
+                `;
+            });
+
+            contentArea.innerHTML = html;
+            document.getElementById('searchInput').value = '';
+
+            if (window.innerWidth <= 768) {
+                document.querySelector('.main-content').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        function searchContent() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.topic-card');
+            
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(input)) {
+                    card.style.display = 'block';
+                    if(input.length > 2) {
+                        card.querySelector('details').setAttribute('open', 'true');
+                    }
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        window.onload = () => {
+            loadTopic('reingenieria', document.querySelector('.nav-btn'));
+        };
+    </script>
+</body>
+</html>
