@@ -257,6 +257,7 @@
             border: 1px solid var(--card-border);
             padding: 8px;
             text-align: left;
+            vertical-align: top;
         }
         th { background-color: var(--hover-bg); }
 
@@ -338,6 +339,7 @@
             <button class="nav-btn active" onclick="loadTopic('reingenieria', this)">🔄 Reingeniería</button>
             <button class="nav-btn" onclick="loadTopic('calidad', this)">⭐ Calidad</button>
             <button class="nav-btn" onclick="loadTopic('gestion', this)">💻 Gestión IT</button>
+            <button class="nav-btn" onclick="loadTopic('equipos', this)">👥 Equipos</button>
             <button class="nav-btn" onclick="loadTopic('rts', this)">⏱️ T. Real (RTS)</button>
             <button class="nav-btn" onclick="loadTopic('costos', this)">💰 Costos</button>
             <button class="nav-btn" onclick="loadTopic('diccionario', this)">📖 Diccionario</button>
@@ -364,7 +366,7 @@
                         titulo: "Definición Genérica (El Concepto)", 
                         contenido: `
                             <p class="highlight">La reingeniería es el rediseño radical de un proceso o sistema existente. No implica ignorar lo que ya hay (de hecho, comienza analizando el inventario y recuperando el diseño del sistema viejo), sino que busca <b>reconstruir su solución desde cero</b>, descartando las prácticas obsoletas para lograr mejoras dramáticas en su rendimiento.</p>
-                            <p>En el contexto del software, significa agarrar un sistema viejo (Legacy), analizar su funcionamiento interno (sin importar que no haya documentación) y reescribirlo con tecnología moderna para que sea más rápido, barato de mantener y de mejor calidad.</p>
+                            <p>En el contexto del software, significa agarrar un sistema viejo (Legacy), analizar su funcionamiento interno y reescribirlo con tecnología moderna.</p>
                         `
                     },
                     { 
@@ -374,7 +376,7 @@
                             <blockquote>
                                 "En lugar de incrustar procesos caducos en silicio y software, debemos eliminarlos y comenzar de nuevo. Debemos 'reingeniar' nuestras empresas usando el poder de la tecnología para <b>rediseñar radicalmente</b> los procesos empresariales para lograr <b>mejoras dramáticas</b> en su rendimiento." 
                             </blockquote>
-                            <p>El software implementado en el mundo real evoluciona continuamente (Sistemas E). Las <b>Leyes de evolución del software (Meir M. Lehman)</b> establecen que:</p>
+                            <p>Las <b>Leyes de evolución del software (Meir M. Lehman)</b> establecen que:</p>
                             <ul>
                                 <li>Conforme un sistema evoluciona, su <b>complejidad aumenta</b>, a menos que se haga trabajo de mantenerlo o reducirlo.</li>
                                 <li>El contenido funcional debe <b>aumentar continuamente</b> para mantener la satisfacción del cliente.</li>
@@ -514,6 +516,80 @@
                     }
                 ]
             },
+            equipos: {
+                titulo: "Gestión de Equipos: Tuckman y Belbin",
+                temas: [
+                    {
+                        titulo: "Modelo de Tuckman (Etapas de un Equipo)",
+                        contenido: `
+                            <p>Estudia la <b>evolución</b> y maduración de un equipo. Tiene 5 etapas:</p>
+                            <ol>
+                                <li><b>Forming (Formación):</b> Se crea el equipo, hay incertidumbre sobre roles y objetivos. Dependencia del líder. Predomina la cordialidad.</li>
+                                <li><b>Storming (Conflicto):</b> Aparecen desacuerdos, se cuestiona el liderazgo y las decisiones. Surgen diferencias de opinión. No hay dinámica estable.</li>
+                                <li><b>Norming (Normalización):</b> Se resuelven diferencias, se establecen normas, roles y responsabilidades. Aumenta la confianza y el sentido de pertenencia.</li>
+                                <li><b>Performing (Desempeño):</b> Alto nivel de madurez y autonomía. Trabajo coordinado, buena comunicación. Foco en alcanzar objetivos con eficiencia.</li>
+                                <li><b>Adjourning (Disolución):</b> Fin del proyecto. Se evalúan resultados, se prepara la separación y se hace el cierre.</li>
+                            </ol>
+                        `
+                    },
+                    {
+                        titulo: "Roles de Belbin (Composición del Equipo)",
+                        contenido: `
+                            <p>Identifica los roles que asumen las personas para que el equipo funcione. Son 9 roles en 3 categorías:</p>
+                            <h4 style="margin-top: 10px; color: var(--accent-color);">1. Orientados a la Acción</h4>
+                            <ul>
+                                <li><b>Impulsor (Shaper):</b> Motiva, desafía dificultades, busca avanzar. Exigente e impaciente.</li>
+                                <li><b>Implementador (Implementer):</b> Transforma ideas en acciones concretas. Organizado, disciplinado, práctico.</li>
+                                <li><b>Finalizador (Completer Finisher):</b> Revisa detalles, detecta errores, garantiza que se complete correctamente.</li>
+                            </ul>
+                            <h4 style="margin-top: 10px; color: var(--accent-color);">2. Orientados a las Personas</h4>
+                            <ul>
+                                <li><b>Coordinador (Coordinator):</b> Organiza, distribuye responsabilidades, facilita la contribución de todos.</li>
+                                <li><b>Cohesionador (Teamworker):</b> Favorece cooperación, resuelve conflictos, mantiene buen clima.</li>
+                                <li><b>Investigador de recursos (Resource Investigator):</b> Busca oportunidades, contactos e info externa. Comunicativo, extrovertido.</li>
+                            </ul>
+                            <h4 style="margin-top: 10px; color: var(--accent-color);">3. Orientados al Pensamiento</h4>
+                            <ul>
+                                <li><b>Cerebro (Plant):</b> Aporta ideas creativas y soluciones originales.</li>
+                                <li><b>Monitor evaluador (Monitor Evaluator):</b> Analiza ideas objetivamente, evalúa alternativas, toma decisiones racionales.</li>
+                                <li><b>Especialista (Specialist):</b> Aporta conocimientos técnicos específicos y experiencia.</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        titulo: "Ejemplo Práctico de Belbin (Equipo de Software)",
+                        contenido: `
+                            <ul>
+                                <li><b>Cerebro:</b> propone una arquitectura innovadora para el sistema.</li>
+                                <li><b>Investigador de recursos:</b> busca herramientas, bibliotecas y soluciones existentes.</li>
+                                <li><b>Monitor evaluador:</b> analiza qué tecnología conviene utilizar.</li>
+                                <li><b>Especialista:</b> domina Django y resuelve problemas técnicos específicos.</li>
+                                <li><b>Coordinador:</b> distribuye las tareas entre los desarrolladores.</li>
+                                <li><b>Cohesionador:</b> ayuda a resolver conflictos entre compañeros.</li>
+                                <li><b>Impulsor:</b> presiona para cumplir los plazos.</li>
+                                <li><b>Implementador:</b> transforma los requerimientos en funcionalidades.</li>
+                                <li><b>Finalizador:</b> revisa el código, detecta errores y verifica la calidad.</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        titulo: "Diferencias y Tips para el Examen",
+                        contenido: `
+                            <table>
+                                <tr><th>Modelo Tuckman</th><th>Modelo Belbin</th></tr>
+                                <tr><td>Estudia la evolución de los equipos.</td><td>Estudia los roles dentro de los equipos.</td></tr>
+                                <tr><td>Tiene 5 etapas.</td><td>Identifica 9 roles.</td></tr>
+                                <tr><td>Explica cómo madura un equipo.</td><td>Explica cómo contribuyen sus integrantes.</td></tr>
+                                <tr><td>Se centra en el desarrollo grupal.</td><td>Se centra en los comportamientos individuales.</td></tr>
+                            </table>
+                            <p class="highlight" style="margin-top: 15px;">
+                                <b>Importante:</b> En Belbin, una persona puede tener varios roles y estos pueden cambiar según las necesidades. No hay un rol superior a otro: lo importante es el <b>equilibrio</b>.<br><br>
+                                <b>Para memorizar:</b> Tuckman = cómo evoluciona el equipo. Belbin = qué aporta cada integrante.
+                            </p>
+                        `
+                    }
+                ]
+            },
             rts: {
                 titulo: "Sistemas de Tiempo Real (RTS)",
                 temas: [
@@ -569,13 +645,8 @@
                                 <p>Conjunto de elementos interconectados para alcanzar un objetivo dado. Se estudia su estructura (elementos e interconexión) y comportamiento, sin hacer referencia a la naturaleza de los elementos.</p>
                             </div>
                             <div class="dict-term">
-                                <strong>Modelo de Tuckman (Etapas de un Equipo)</strong>
-                                <p>Explica las fases por las que pasa un equipo: <b>Formación</b> (conocerse), <b>Tormenta</b> (conflictos), <b>Normalización</b> (acuerdos), <b>Desempeño</b> (trabajo productivo) y <b>Disolución</b>. Determina el <i>cuándo</i> (el momento del equipo).</p>
-                            </div>
-                            <div class="dict-term">
-                                <strong>Roles de Belbin (Composición del Equipo)</strong>
-                                <p>Identifica los roles que asumen las personas en un equipo para que funcione (Cerebro/ideas, Coordinador, Monitor/Evaluador, Cohesionador, etc.). Determina el <i>quién</i> (las habilidades).</p>
-                                <p><b>Relación entre ambos:</b> Se complementan. Tuckman dice en qué <i>etapa</i> está el equipo y Belbin ayuda a entender <i>por qué</i> chocan (ej. falta un Cohesionador). Juntos permiten al PM guiar al equipo.</p>
+                                <strong>Modelo de Tuckman y Roles de Belbin</strong>
+                                <p>Ambos modelos se complementan en la gestión de equipos. <b>Tuckman</b> dice en qué <i>etapa</i> está el equipo (Formación, Tormenta, Normalización, Desempeño, Disolución) y <b>Belbin</b> ayuda a entender <i>por qué</i> funcionan o chocan (9 roles: Cerebro, Coordinador, Cohesionador, etc.). Juntos permiten al PM guiar al equipo. <a href="#" onclick="loadTopic('equipos', document.querySelectorAll('.nav-btn')[3]); return false;" style="color: var(--accent-color); font-weight: bold;">(Ver pestaña de Equipos)</a></p>
                             </div>
                         `
                     },
