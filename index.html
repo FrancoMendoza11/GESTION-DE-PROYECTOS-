@@ -201,11 +201,30 @@
             margin-bottom: 8px;
         }
 
+        /* Estilo específico para el diccionario */
+        .dict-term {
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed var(--card-border);
+        }
+        .dict-term:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .dict-term strong {
+            color: var(--accent-color);
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.05rem;
+        }
+
         .highlight {
             background-color: rgba(52, 152, 219, 0.2);
-            padding: 2px 4px;
-            border-radius: 4px;
+            padding: 10px;
+            border-radius: 5px;
             font-weight: 600;
+            margin-bottom: 15px;
+            display: block;
         }
         
         .formula {
@@ -321,12 +340,13 @@
             <button class="nav-btn" onclick="loadTopic('gestion', this)">💻 Gestión IT</button>
             <button class="nav-btn" onclick="loadTopic('rts', this)">⏱️ T. Real (RTS)</button>
             <button class="nav-btn" onclick="loadTopic('costos', this)">💰 Costos</button>
+            <button class="nav-btn" onclick="loadTopic('diccionario', this)">📖 Diccionario</button>
         </div>
     </aside>
 
     <main class="main-content">
         <header>
-            <input type="text" id="searchInput" class="search-bar" placeholder="Buscar concepto..." onkeyup="searchContent()">
+            <input type="text" id="searchInput" class="search-bar" placeholder="Buscar concepto en todo el sitio..." onkeyup="searchContent()">
             <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
         </header>
 
@@ -341,17 +361,25 @@
                 titulo: "Reingeniería de Software",
                 temas: [
                     { 
-                        titulo: "El Concepto y las Leyes de Lehman", 
+                        titulo: "Definición Genérica (El Concepto)", 
                         contenido: `
+                            <p class="highlight">La reingeniería es el rediseño radical de un proceso o sistema existente. No implica ignorar lo que ya hay (de hecho, comienza analizando el inventario y recuperando el diseño del sistema viejo), sino que busca <b>reconstruir su solución desde cero</b>, descartando las prácticas obsoletas para lograr mejoras dramáticas en su rendimiento.</p>
+                            <p>En el contexto del software, significa agarrar un sistema viejo (Legacy), analizar su funcionamiento interno (sin importar que no haya documentación) y reescribirlo con tecnología moderna para que sea más rápido, barato de mantener y de mejor calidad.</p>
+                        `
+                    },
+                    { 
+                        titulo: "El Contexto de Negocios y las Leyes de Lehman", 
+                        contenido: `
+                            <p>El término nació en los negocios con Michael Hammer y James Champy:</p>
+                            <blockquote>
+                                "En lugar de incrustar procesos caducos en silicio y software, debemos eliminarlos y comenzar de nuevo. Debemos 'reingeniar' nuestras empresas usando el poder de la tecnología para <b>rediseñar radicalmente</b> los procesos empresariales para lograr <b>mejoras dramáticas</b> en su rendimiento." 
+                            </blockquote>
                             <p>El software implementado en el mundo real evoluciona continuamente (Sistemas E). Las <b>Leyes de evolución del software (Meir M. Lehman)</b> establecen que:</p>
                             <ul>
                                 <li>Conforme un sistema evoluciona, su <b>complejidad aumenta</b>, a menos que se haga trabajo de mantenerlo o reducirlo.</li>
                                 <li>El contenido funcional debe <b>aumentar continuamente</b> para mantener la satisfacción del cliente.</li>
                                 <li>La calidad declinará, a menos que se mantenga y adapten a los cambios del entorno.</li>
                             </ul>
-                            <blockquote>
-                                "En lugar de incrustar procesos caducos en silicio y software, debemos eliminarlos y comenzar de nuevo. Debemos 'reingeniar' nuestras empresas usando el poder de la tecnología para <b>rediseñar radicalmente</b> los procesos empresariales para lograr <b>mejoras dramáticas</b> en su rendimiento." (Hammer y Champy)
-                            </blockquote>
                         `
                     },
                     { 
@@ -406,143 +434,54 @@
                         contenido: `
                             <p><b>Definición:</b> "Calidad es concordancia con las especificaciones".</p>
                             <p><b>Dilema:</b> Si es de baja calidad, nadie lo acepta. Si se busca la perfección, es tan caro que queda fuera del mercado.</p>
-                            <p>Desde el desarrollo se distinguen: <b>Procesos</b> (métodos/procedimientos), <b>Productos</b> (entregables/versiones) y <b>Recursos</b> (elementos necesarios, incluidos RRHH).</p>
+                            <p>Desde el desarrollo se distinguen: <b>Procesos</b>, <b>Productos</b> y <b>Recursos</b>.</p>
                             <ul>
                                 <li><b>Calidad Interna:</b> Diseño y construcción (arquitectura, estructura, interfaces, codificación).</li>
-                                <li><b>Calidad Externa:</b> Se determina en los requisitos (visibles externamente). Verificada en entorno simulado con métricas.</li>
-                                <li><b>Calidad en Uso:</b> Percepción que se forma el usuario final (previsible en base a interna/externa).</li>
+                                <li><b>Calidad Externa:</b> Se determina en los requisitos (visibles externamente).</li>
+                                <li><b>Calidad en Uso:</b> Percepción que se forma el usuario final.</li>
                             </ul>
                         `
                     },
                     {
                         titulo: "Ciclo de Mejora y Características (ISO 9126)",
                         contenido: `
-                            <p>Ciclo: <b>Definir</b> (documentar) -> <b>Ejecutar</b> (monitorear) -> <b>Medir</b> (cuantificar) -> <b>Mejorar</b>.</p>
+                            <p>Ciclo: <b>Definir</b> -> <b>Ejecutar</b> -> <b>Medir</b> -> <b>Mejorar</b>.</p>
                             <ul>
                                 <li><b>Funcionalidad:</b> (Adecuación, Exactitud, Interoperabilidad, Seguridad, Conformidad).</li>
-                                <li><b>Confiabilidad:</b> (Madurez, Tolerancia a fallas, Recuperabilidad, Conformidad).</li>
-                                <li><b>Usabilidad:</b> (Comprensibilidad, Facilidad de aprendizaje, Operabilidad, Atracción, Conformidad).</li>
-                                <li><b>Eficiencia:</b> (Comportamiento temporal, Utilización de recursos, Conformidad).</li>
-                                <li><b>Mantenibilidad:</b> (Analizabilidad, Cambiabilidad, Estabilidad, Facilidad de prueba, Conformidad).</li>
-                                <li><b>Portabilidad:</b> (Adaptabilidad, Facilidad de instalación, Coexistencia, Reemplazabilidad, Conformidad).</li>
+                                <li><b>Confiabilidad:</b> (Madurez, Tolerancia a fallas, Recuperabilidad).</li>
+                                <li><b>Usabilidad:</b> (Comprensibilidad, Facilidad de aprendizaje, Operabilidad, Atracción).</li>
+                                <li><b>Eficiencia:</b> (Comportamiento temporal, Utilización de recursos).</li>
+                                <li><b>Mantenibilidad:</b> (Analizabilidad, Cambiabilidad, Estabilidad, Facilidad de prueba).</li>
+                                <li><b>Portabilidad:</b> (Adaptabilidad, Facilidad de instalación, Coexistencia, Reemplazabilidad).</li>
                             </ul>
                         `
                     },
                     {
-                        titulo: "Plan de la Calidad (Entradas, Herramientas, Salidas)",
+                        titulo: "Plan de la Calidad",
                         contenido: `
-                            <p><b>Define:</b> Identifica los requisitos de calidad documentando el cumplimiento de los mismos.</p>
-                            <p><b>Entradas:</b></p>
-                            <ul>
-                                <li>Documentos previos del proyecto (inicio, EDT, Riesgo, etc.).</li>
-                                <li>Opinión de Interesados.</li>
-                                <li>Entorno del proyecto.</li>
-                                <li>Equilibrio de costos.</li>
-                            </ul>
-                            <p><b>Herramientas:</b></p>
-                            <ul>
-                                <li>Análisis de costos.</li>
-                                <li>Gráficos de control.</li>
-                                <li>Secuenciamiento de actividades.</li>
-                                <li>Diseño de Experimento, técnicas de muestreo, tormenta de ideas, etc.</li>
-                            </ul>
-                            <p><b>Salidas:</b></p>
-                            <ul>
-                                <li>Plan de gestión de calidad.</li>
-                                <li>Métricas de calidad.</li>
-                                <li>Check List.</li>
-                            </ul>
-                            <p><i>IEEE 730-2002:</i> Mínimamente debe tener: Propósito y alcance, Estructura de gestión, Métricas e instrumentos, Revisiones de software, Pruebas, Controles de proveedores y de riesgos.</p>
+                            <p><b>Entradas:</b> Documentos previos, Interesados, Entorno, Equilibrio de costos.</p>
+                            <p><b>Herramientas:</b> Análisis de costos, Gráficos de control, Secuenciamiento, Diseño de Experimento, muestreo.</p>
+                            <p><b>Salidas:</b> Plan de gestión de calidad, Métricas de calidad, Check List.</p>
                         `
                     },
                     {
-                        titulo: "Aseguramiento de la Calidad (QA) (Entradas, Herramientas, Salidas)",
+                        titulo: "Aseguramiento (QA) y Control (QC)",
                         contenido: `
-                            <p><b>Define:</b> Conjunto de funciones de auditoría y reportes para evaluar la eficacia y completitud de las acciones de control de calidad. Debe auditar requisitos y resultados.</p>
-                            <p><b>Entradas:</b></p>
-                            <ul>
-                                <li>Plan de gestión de calidad.</li>
-                                <li>Métricas de calidad y sus mediciones.</li>
-                                <li>Mediciones de rendimiento del esfuerzo.</li>
-                            </ul>
-                            <p><b>Herramientas:</b></p>
-                            <ul>
-                                <li>Herramientas y técnicas de control de calidad.</li>
-                                <li>Auditorías para identificar mejores prácticas y anomalías.</li>
-                                <li>Análisis de procesos para establecer mejoras.</li>
-                            </ul>
-                            <p><b>Salidas:</b></p>
-                            <ul>
-                                <li>Actualización de estándares y requisitos.</li>
-                                <li>Solicitudes de cambio.</li>
-                                <li>Actualizaciones al plan de calidad.</li>
-                            </ul>
-                            <p><i>Comprende además:</i> Revisiones de calidad, métodos/herramientas eficaces, control de elementos producidos, procedimientos estándares, mecanismos de medición y reporte, programas de capacitación, gestión de proveedores.</p>
-                        `
-                    },
-                    {
-                        titulo: "Control de la Calidad (QC) (Entradas, Herramientas, Salidas)",
-                        contenido: `
-                            <p><b>Define:</b> Se monitorean y registran los resultados para evaluar rendimiento y recomendar cambios. Trata de identificar las <b>causas</b> de la calidad deficiente.</p>
-                            <p><b>Entradas:</b></p>
-                            <ul>
-                                <li>Plan de gestión de calidad.</li>
-                                <li>Métricas de calidad. Check list.</li>
-                                <li>Mediciones de rendimiento del esfuerzo.</li>
-                                <li>Solicitudes de cambio.</li>
-                                <li>Estándares. Entregables.</li>
-                            </ul>
-                            <p><b>Herramientas:</b></p>
-                            <ul>
-                                <li>Diagramas causa - efecto (Espina de pescado).</li>
-                                <li>Gráficos de control estadístico de la calidad.</li>
-                                <li>Diagramas de Pareto.</li>
-                                <li>Revisiones de solicitudes de cambios aprobadas.</li>
-                            </ul>
-                            <p><b>Salidas:</b></p>
-                            <ul>
-                                <li>Mediciones.</li>
-                                <li>Cambios y entregables validados.</li>
-                                <li>Actualización de estándares.</li>
-                                <li>Solicitudes de cambios.</li>
-                                <li>Actualizaciones al plan.</li>
-                            </ul>
-                        `
-                    },
-                    {
-                        titulo: "El Grupo de QA y el Manejo de Errores",
-                        contenido: `
-                            <p><b>Responsabilidad del Grupo de QA:</b> Planear, supervisar, registrar, analizar y construir reportes para garantizar la seguridad de procesos y productos.</p>
-                            <p><b>Debe:</b> Preparar un plan, revisar documentos/especificaciones, verificar cumplimiento de pruebas, auditar tareas del desarrollo, registrar y documentar. (Metas: Calidad de requerimientos, diseño, código, eficacia).</p>
-                            <p><b>¿Qué hacer con los errores?</b></p>
-                            <ol>
-                                <li>Identificar y clasificar los errores.</li>
-                                <li>Rastrear cada error hacia su origen o primeras causas.</li>
-                                <li>Realizar una clasificación tipo Pareto.</li>
-                                <li>Trabajar sobre las causas de mayor peso.</li>
-                            </ol>
-                            <p><b>Ejemplo Pareto:</b></p>
-                            <table>
-                                <tr><th>Causa</th><th>Errores</th><th>%</th></tr>
-                                <tr><td>Mala interpretación req.</td><td>35</td><td>35%</td></tr>
-                                <tr><td>Violación estándares</td><td>25</td><td>25%</td></tr>
-                                <tr><td>Especificaciones incompletas</td><td>15</td><td>15%</td></tr>
-                                <tr><td>Documentación inexacta</td><td>9</td><td>9%</td></tr>
-                            </table>
-                            <p><i>El 75% de los errores vienen del top 3 (Pocos vitales).</i></p>
-                            <p><b>Diagrama Causa-Efecto (6M):</b> Medidas, Materiales, RH, Medio, Métodos, Máquinas. Se usa para encontrar la causa raíz de un efecto (falla).</p>
+                            <p><b>QA (Aseguramiento):</b> Auditoría y reportes para evaluar eficacia. Busca que los <b>procesos</b> se cumplan.</p>
+                            <p><b>QC (Control):</b> Monitorea resultados reales contra el plan. Identifica las <b>causas</b> de la calidad deficiente en el <b>producto</b>.</p>
+                            <hr style="margin: 10px 0;">
+                            <p><b>Manejo de Errores:</b> Identificar, rastrear origen, clasificar tipo Pareto (80/20) y atacar causas de mayor peso.</p>
                         `
                     },
                     {
                         titulo: "CMMI (Niveles de Madurez)",
                         contenido: `
-                            <p>Conjunto de normas y procedimientos que proporcionan un marco para mejores productos y procesos.</p>
                             <ul>
-                                <li><b>Nivel 1 (Inicial):</b> Procesos ad-hoc y caóticos. Éxito depende de personas.</li>
-                                <li><b>Nivel 2 (Gestionado):</b> Procesos planificados, documentados, medidos y controlados.</li>
-                                <li><b>Nivel 3 (Definido):</b> Procesos especificados y detallados. Estandarizados.</li>
-                                <li><b>Nivel 4 (Cuantitativamente Gestionado):</b> Objetivos cuantitativos. Procesos predecibles.</li>
-                                <li><b>Nivel 5 (Optimización):</b> Mejora continua basada en causas de variación. Innovación.</li>
+                                <li><b>Nivel 1:</b> Ad-hoc, caótico.</li>
+                                <li><b>Nivel 2:</b> Planificado, documentado.</li>
+                                <li><b>Nivel 3:</b> Estandarizado, detallado.</li>
+                                <li><b>Nivel 4:</b> Cuantitativo, predecible.</li>
+                                <li><b>Nivel 5:</b> Mejora continua, innovación.</li>
                             </ul>
                         `
                     }
@@ -554,40 +493,23 @@
                     {
                         titulo: "Sistemas, Empresa y Ecología",
                         contenido: `
-                            <p><b>Sistema:</b> Elementos interconectados para alcanzar un objetivo. Involucra Personas, Tecnologías y Procesos.</p>
-                            <p><b>Ecología de la Información:</b> Valores y Creencias ("me quedo sin trabajo"), Utilización ("no puedo usarla"), Procesos ("en vez de agilizar..."), Barreras ("nunca voy a poder"), Sistemas.</p>
-                            <p><b>Economía de la Información:</b> La utilidad marginal baja con la cantidad, el costo marginal sube. Existe una <b>Cantidad Óptima</b>.</p>
-                            <p><b>Síntomas de Mal Funcionamiento:</b></p>
-                            <ul>
-                                <li><b>Funcionales:</b> Inconsistencias entre operaciones y registro ("¿por qué tantos ajustes?").</li>
-                                <li><b>Psicológicos:</b> Sorpresa frente a circunstancias ("¿cómo puede ser?"). Falla comunicación a dirección.</li>
-                                <li><b>Contenido:</b> Inconsistencias entre informes ("¿no debería dar el mismo valor?").</li>
-                            </ul>
+                            <p><b>Sistema:</b> Elementos interconectados para alcanzar un objetivo (Estructura y Comportamiento). Involucra Personas, Tecnologías y Procesos.</p>
+                            <p><b>Ecología de la Información:</b> Valores y Creencias, Utilización, Procesos de trabajo, Barreras, Sistemas y Tecnologías.</p>
                         `
                     },
                     {
                         titulo: "Actividad Directiva y Aplicaciones",
                         contenido: `
-                            <p>Pirámide de Anthony (1965):</p>
-                            <ul>
-                                <li><b>Alta Dirección:</b> Planificación Estratégica (Simulación, info externa).</li>
-                                <li><b>Control / Gerencia:</b> Supervisión (Tendencias, desvíos).</li>
-                                <li><b>Operaciones:</b> Verificación de tareas (Operación, info interna).</li>
-                            </ul>
-                            <p><b>CSCW (Groupware):</b> Trabajo en equipo. Historia: NLS (1968, hyperlink, mouse), Lotus Notes (1992), ICQ (1995).</p>
-                            <p><b>ERP:</b> Producto que cubre todas las operaciones. Módulos integrados. Un dato se incorpora una vez. <b>Costos Ocultos:</b> Integración con procesos, desatención de capacitación, dependencia de consultores, "Depresión post-ERP" (problemas con nueva forma de operar).</p>
+                            <p>Pirámide de Anthony (1965): Alta Dirección (Estratégico/Simulación), Gerencia (Táctico/Tendencias), Operaciones (Diario/Desvíos).</p>
+                            <p><b>ERP:</b> Cubre todas las operaciones. Módulos integrados. Un dato se incorpora una vez. Tiene costos ocultos (integración, capacitación, dependencia).</p>
                         `
                     },
                     {
-                        titulo: "Estrategia IT y Porter",
+                        titulo: "Estrategia IT y Outsourcing",
                         contenido: `
-                            <ul>
-                                <li><b>Táctico:</b> Automatizar procesos internos, mejoras cuantitativas, centro de costos (gasto operativo).</li>
-                                <li><b>Estratégico:</b> Dirigido al entorno, ventajas competitivas, centro de resultados (inversión).</li>
-                            </ul>
-                            <p><b>Cinco Fuerzas de Porter:</b> Nuevos Competidores (amenaza), Proveedores (poder), Clientes (poder), Productos Sustitutos (amenaza), Rivalidad (en el centro).</p>
-                            <p><b>Por qué fallan los proyectos (Standish Group):</b> Escasa participación de usuarios, especificaciones incompletas, cambios frecuentes, falta de apoyo ejecutivo, incompetencia tecnológica, falta de recursos, expectativas no realistas, objetivos poco claros, cronogramas irreales, nuevas tecnologías.</p>
-                            <p><b>Outsourcing:</b> Transferir a un proveedor. Claves: Tercerizar actividades seguras, investigar proveedor, flexibilidad de renegociación, mantener personal de TI.</p>
+                            <p><b>Táctico:</b> Automatizar procesos, mejoras cuantitativas (centro de costos).</p>
+                            <p><b>Estratégico:</b> Dirigido al entorno, ventajas competitivas (centro de resultados).</p>
+                            <p><b>Outsourcing:</b> Transferir a un proveedor actividades del negocio. Claves: Tercerizar actividades seguras, investigar proveedor, flexibilidad, mantener personal de TI.</p>
                         `
                     }
                 ]
@@ -598,35 +520,19 @@
                     {
                         titulo: "Definiciones y Clasificación",
                         contenido: `
-                            <p>Destinados a monitorear, controlar o responder a un entorno físico.</p>
                             <p><b>Definición:</b> El tiempo de entrega es tan importante como la correctitud. Consecuencias de tardanza son peligrosas.</p>
                             <ul>
-                                <li><b>RTS Blando (Soft):</b> Se degrada si no cumple tiempo (ej. cámaras, streaming).</li>
-                                <li><b>RTS Duro (Hard):</b> Es <b>incorrecto</b> si no cumple (ej. Airbag, ABS, aviónica).</li>
+                                <li><b>RTS Blando (Soft):</b> Se degrada si no cumple tiempo (cámaras, streaming).</li>
+                                <li><b>RTS Duro (Hard):</b> Es <b>incorrecto</b> si no cumple (Airbag, ABS, aviónica).</li>
                             </ul>
-                            <p><b>Estímulos:</b> Periódicos (sensores, predecibles) y Aperiódicos (irregulares, emergencias).</p>
+                            <p><b>Estímulos:</b> Periódicos (sensores) y Aperiódicos (emergencias).</p>
                         `
                     },
                     {
                         titulo: "Sistemas Embebidos y RTOS",
                         contenido: `
-                            <p><b>Embebidos:</b> Forman parte de un sistema mayor. Presencia no obvia (Caja Negra). Ej: Motores, lavarropas, marcapasos. Pueden usar SO estándar (Unix), RTOS o ASIC.</p>
-                            <p><b>RTOS:</b> Minimizan latencia de interrupciones y context switch. Soportan concurrencia, temporización determinista, E/S. Ej: FreeRTOS, QNX, RTLinux.</p>
-                            <p><b>Lenguajes:</b> Ensamblador, C/C++ (secuenciales, requieren SO) y Ada/RTJava (concurrentes).</p>
-                        `
-                    },
-                    {
-                        titulo: "Diseño y Caso Práctico (ABS)",
-                        contenido: `
-                            <p>Identificar estímulos/respuestas, restricciones temporales, plataforma, procesos concurrentes, algoritmos y planificación (scheduling). UML tiene limitaciones para RTS (se usa RT UML Profile).</p>
-                            <p><b>ABS:</b></p>
-                            <ul>
-                                <li><b>Requerimientos:</b> Disminuir velocidad, ruedas no bloqueadas.</li>
-                                <li><b>Sensores:</b> Velocidad de rueda.</li>
-                                <li><b>Eventos:</b> Bloqueo inminente.</li>
-                                <li><b>Actuadores:</b> Válvulas hidráulicas.</li>
-                                <li><b>Algoritmo:</b> Si se frena bruscamente, liberar presión para que gire, volver a frenar.</li>
-                            </ul>
+                            <p><b>Embebidos:</b> Caja Negra (no obvio al usuario). Ej: Motores, lavarropas.</p>
+                            <p><b>RTOS:</b> Minimizan latencia de interrupciones. Soportan concurrencia y planificación determinista.</p>
                         `
                     }
                 ]
@@ -635,40 +541,172 @@
                 titulo: "Gestión de Costos",
                 temas: [
                     {
-                        titulo: "Definición y Clasificación",
+                        titulo: "Definición y Estimación",
                         contenido: `
-                            <p><b>Costo:</b> Desembolso presente, pasado o futuro, real o virtual, aplicable a la creación/explotación de valor.</p>
-                            <ul>
-                                <li><b>Período:</b> Corrientes, Previstos, Diferidos, Hundidos.</li>
-                                <li><b>Función:</b> Producción, Servicios, Comercialización, Administración, Financieros.</li>
-                                <li><b>Naturaleza:</b> Materias Primas, Sueldos, Cargas, Otras.</li>
-                                <li><b>Imputación:</b> Directos (asignación directa) e Indirectos (criterio).</li>
-                                <li><b>Variabilidad:</b> Variables (volumen), Fijos (independientes), Semifijos (tramos).</li>
-                            </ul>
+                            <p><b>Costo:</b> Desembolso aplicable a la creación/explotación de valor.</p>
+                            <p><b>Bottom-up:</b> Evalúa detalle de cada unidad de la EDT y agrega hacia arriba.</p>
+                            <p><b>Top-down:</b> Paramétrico. Usa info histórica y métricas (Hs x PF) sin evaluar tareas.</p>
                         `
                     },
                     {
-                        titulo: "Asignación, OTC y Amortización",
+                        titulo: "OTC y Punto de Equilibrio",
                         contenido: `
-                            <p><b>Centro de Costo:</b> Recibe erogaciones y las distribuye (base de distribución).</p>
-                            <p><b>Amortizar:</b> Disminución proporcional del valor del activo por vida útil (Ej: Servidor u$s 10.000 / 4 años = u$s 2.500/año).</p>
                             <p class="formula">OTC = Inversión Inicial + (Costo periódico recurrente × Cantidad de períodos de vida útil)</p>
+                            <p><b>Amortizar:</b> Disminución proporcional del valor del activo por vida útil.</p>
+                            <p class="formula">Punto de Equilibrio = Costos Fijos Totales / Contribución Marginal Unitaria</p>
+                        `
+                    }
+                ]
+            },
+            diccionario: {
+                titulo: "📖 Diccionario de Conceptos",
+                temas: [
+                    {
+                        titulo: "1. Conceptos Generales y de Equipo",
+                        contenido: `
+                            <div class="dict-term">
+                                <strong>Sistema</strong>
+                                <p>Conjunto de elementos interconectados para alcanzar un objetivo dado. Se estudia su estructura (elementos e interconexión) y comportamiento, sin hacer referencia a la naturaleza de los elementos.</p>
+                            </div>
+                            <div class="dict-term">
+                                <strong>Modelo de Tuckman (Etapas de un Equipo)</strong>
+                                <p>Explica las fases por las que pasa un equipo: <b>Formación</b> (conocerse), <b>Tormenta</b> (conflictos), <b>Normalización</b> (acuerdos), <b>Desempeño</b> (trabajo productivo) y <b>Disolución</b>. Determina el <i>cuándo</i> (el momento del equipo).</p>
+                            </div>
+                            <div class="dict-term">
+                                <strong>Roles de Belbin (Composición del Equipo)</strong>
+                                <p>Identifica los roles que asumen las personas en un equipo para que funcione (Cerebro/ideas, Coordinador, Monitor/Evaluador, Cohesionador, etc.). Determina el <i>quién</i> (las habilidades).</p>
+                                <p><b>Relación entre ambos:</b> Se complementan. Tuckman dice en qué <i>etapa</i> está el equipo y Belbin ayuda a entender <i>por qué</i> chocan (ej. falta un Cohesionador). Juntos permiten al PM guiar al equipo.</p>
+                            </div>
                         `
                     },
                     {
-                        titulo: "Estimación, Control y Análisis",
+                        titulo: "2. Definiciones Textuales: Calidad",
                         contenido: `
-                            <ul>
-                                <li><b>Bottom-up:</b> Datos detallados de EDT, se agregan hacia arriba.</li>
-                                <li><b>Top-down:</b> Paramétrico, info histórica (Hs x PF).</li>
-                            </ul>
-                            <p><b>Control:</b> Comparar estimado vs real. Desvíos: Ejecución deficiente, Estimación deficiente, Exógenos.</p>
-                            <p><b>Análisis (Decisiones):</b></p>
-                            <ul>
-                                <li><b>Contribución Marginal:</b> Precio Venta Neto - Costos Variables.</li>
-                                <li><b>Punto de Equilibrio:</b> Costos Fijos Totales / Contribución Marginal Unitaria.</li>
-                            </ul>
-                            <p><i>Cuidado:</i> No discontinuar productos sin ganancia si cubren costos fijos.</p>
+                            <div class="dict-term">
+                                <strong>Calidad (Pág. 8)</strong>
+                                <p>"Calidad es concordancia con las especificaciones".</p>
+                            </div>
+                            <div class="dict-term">
+                                <strong>Proceso eficaz de software (Pág. 10)</strong>
+                                <p>"Un proceso eficaz de software establece la infraestructura que da apoyo a cualquier esfuerzo de elaboración de un producto de calidad".</p>
+                            </div>
+                            <div class="dict-term">
+                                <strong>Calidad Externa / Interna / de Uso (Págs. 20-26)</strong>
+                                <ul>
+                                    <li><b>Externa:</b> "Es la que se determina en los requisitos de calidad. Deben ser visibles externamente".</li>
+                                    <li><b>Interna:</b> "Calidad especificada para los elementos que se construyen para el producto. Por ej. arquitectura, estructura, interfaces".</li>
+                                    <li><b>En Uso:</b> "La percepción que se forma el usuario".</li>
+                                </ul>
+                            </div>
+                            <div class="dict-term">
+                                <strong>Características ISO 9126 (Págs. 33-55)</strong>
+                                <ul>
+                                    <li><b>Funcionalidad:</b> "Proporcionar las funciones que satisfagan las necesidades en las condiciones de uso establecidas".</li>
+                                    <li><b>Confiabilidad:</b> "Mantener el rendimiento adecuado cuando se utiliza en las condiciones correctas".</li>
+                                    <li><b>Usabilidad:</b> "Capacidad del producto para ser entendido, usado y aprendido".</li>
+                                    <li><b>Eficiencia:</b> "Proporcionar un rendimiento adecuado relativo a la cantidad de recursos utilizados".</li>
+                                    <li><b>Mantenibilidad:</b> "Capacidad para ser modificado".</li>
+                                    <li><b>Portabilidad:</b> "Capacidad para ser transferido de un entorno a otro".</li>
+                                </ul>
+                            </div>
+                            <div class="dict-term">
+                                <strong>Gestión y Aseguramiento (Págs. 66-71)</strong>
+                                <ul>
+                                    <li><b>Gestión:</b> "Procura satisfacer los requerimientos de calidad establecidos".</li>
+                                    <li><b>Aseguramiento (QA):</b> "Consiste en un conjunto de funciones de auditoria y reportes para evaluar la eficacia y completitud de las acciones de control de calidad".</li>
+                                </ul>
+                            </div>
+                            <div class="dict-term">
+                                <strong>CMMI (Pág. 89)</strong>
+                                <p>"Conjunto de normas y procedimientos que proporcionan un marco para la mejor productos y procesos".</p>
+                            </div>
+                        `
+                    },
+                    {
+                        titulo: "3. Definiciones Textuales: Reingeniería",
+                        contenido: `
+                            <div class="dict-term">
+                                <strong>Reingeniería (Definición Genérica)</strong>
+                                <p>Rediseño radical de un proceso o sistema existente. No ignora lo que ya hay (analiza el inventario y aplica ingeniería inversa), sino que busca <b>reconstruir su solución desde cero</b>, descartando las prácticas obsoletas para lograr mejoras dramáticas en su rendimiento.</p>
+                            </div>
+                            <div class="dict-term">
+                                <strong>Reingeniería (Cita Hammer y Champy - Pág. 7)</strong>
+                                <p>"En lugar de incrustar procesos caducos en silicio y software, debemos eliminarlos y comenzar de nuevo. Debemos 'reingeniar' nuestras empresas usando el poder de la tecnología para rediseñar radicalmente los procesos empresariales para lograr mejoras dramáticas en su rendimiento".</p>
+                            </div>
+                            <div class="dict-term">
+                                <strong>Mantenibilidad y Soportabilidad (Págs. 5-6)</strong>
+                                <ul>
+                                    <li><b>Mantenibilidad:</b> Posee modularidad adecuada, patrones de diseño, convenciones de codificación, código comprensible, auto documentado y revisiones.</li>
+                                    <li><b>Soportabilidad:</b> "Dar soporte a un software implica todas las tareas requeridas para mantener en adecuado funcionamiento el producto liberado".</li>
+                                </ul>
+                            </div>
+                            <div class="dict-term">
+                                <strong>Ingeniería Inversa (Pág. 11)</strong>
+                                <p>"Es el proceso de recuperación del diseño, analizar el programa con la intención de construir una representación del mismo con un nivel de abstracción superior".</p>
+                                <p><b>Completitud (Pág. 13):</b> "Nivel de detalle que se obtiene para un nivel de abstracción dado".</p>
+                            </div>
+                            <div class="dict-term">
+                                <strong>Reestructuración vs Ingeniería Adelante (Págs. 24-27)</strong>
+                                <ul>
+                                    <li><b>Reestructuración de código:</b> "Produce la misma o más funcionalidad con más y mejor calidad".</li>
+                                    <li><b>Ingeniería hacia adelante:</b> "Recupera el diseño del software existente para reconstruirlo mejorando su calidad global".</li>
+                                </ul>
+                            </div>
+                        `
+                    },
+                    {
+                        titulo: "4. Definiciones Textuales: Gestión IT y RTS",
+                        contenido: `
+                            <div class="dict-term">
+                                <strong>Gestión IT (Págs. 3-105)</strong>
+                                <ul>
+                                    <li><b>Sistema:</b> "Conjunto de Elementos interconectados para alcanzar un objetivo dado".</li>
+                                    <li><b>Sistema de Información:</b> "Especializa el objetivo. Tratamiento de la Información".</li>
+                                    <li><b>CSCW:</b> "Disciplina que estudia las formas en las que la gente trabaja en equipo, con las tecnologías que facilitan su trabajo".</li>
+                                    <li><b>Transacción:</b> "Suceso que implica o afecta a una organización o empresa y es relevante".</li>
+                                    <li><b>ERP:</b> "Producto de Software que cubre todas las operaciones de la compañía".</li>
+                                    <li><b>Factor crítico de éxito:</b> "Aquello que si falla produce que no alcancemos el objetivo".</li>
+                                    <li><b>Outsourcing:</b> "Proceso mediante el cual transferimos a un proveedor una o todas las actividades de un procesos de negocios dado".</li>
+                                </ul>
+                            </div>
+                            <div class="dict-term">
+                                <strong>RTS (Págs. 3-20)</strong>
+                                <ul>
+                                    <li><b>RTS (Definición):</b> "El tiempo en el que la respuesta es entregada es tan importante como la correctitud de la respuesta".</li>
+                                    <li><b>RTS Blando (Soft):</b> "Su funcionamiento se degrada si los resultados no son como su especificación temporal".</li>
+                                    <li><b>RTS Duro (Hard):</b> "Su funcionamiento es incorrecto si los resultados no son como su especificación temporal".</li>
+                                    <li><b>Sistema integrado:</b> "Dispositivo informático que forma partes de un sistema de mayor tamaño, en el que la presencia de ese dispositivo a menudo NO resulta obvia para el usuario. (CAJA NEGRA)".</li>
+                                    <li><b>RTOS:</b> "A menudo llamados RTOS (Real Time Operating System)".</li>
+                                </ul>
+                            </div>
+                        `
+                    },
+                    {
+                        titulo: "5. Definiciones Textuales: Costos",
+                        contenido: `
+                            <div class="dict-term">
+                                <strong>Costo (Pág. 3)</strong>
+                                <p>"Muy utilizada y no definida con exactitud. Es un desembolso presente, pasado o futuro, real o virtual, aplicables a la creación / explotación de valor".</p>
+                            </div>
+                            <div class="dict-term">
+                                <strong>OTC - Costo Total de Uso (Pág. 27)</strong>
+                                <p>"Inversión Inicial + (Costo periódico recurrente * Cantidad de períodos de vida útil)".</p>
+                            </div>
+                            <div class="dict-term">
+                                <strong>Centro de Costo (Pág. 25)</strong>
+                                <p>"Recibe un conjunto de erogaciones que se le asignan que luego distribuye a los bienes / servicios u otro centro de costo conforme a un base de distribución".</p>
+                            </div>
+                            <div class="dict-term">
+                                <strong>Estimación (Págs. 32-33)</strong>
+                                <ul>
+                                    <li><b>Bottom-up:</b> "Se centra en recoger los datos detallados de cada una de las unidades de trabajo de la EDT y una vez reunidos se van agregando en tareas de jerarquía superior".</li>
+                                    <li><b>Top-down:</b> "También llamado paramétrico deja de lado las tareas y se basa en información histórica aplicada a las características del objeto del proyecto".</li>
+                                </ul>
+                            </div>
+                            <div class="dict-term">
+                                <strong>Punto de Equilibrio (Pág. 58)</strong>
+                                <p>"Cantidad de unidades que cubren los costos fijos totales".</p>
+                            </div>
                         `
                     }
                 ]
