@@ -515,6 +515,7 @@
                             <p><b>6. Definir los Requisitos y Características (ISO 9126):</b></p>
                             <p>Seleccionar qué características aplican a mi proyecto (Funcionalidad, Confiabilidad, Usabilidad, Eficiencia, Mantenibilidad, Portabilidad) para que luego QA (Aseguramiento) audite procesos, y QC (Control) monitoree el producto final.</p>
                             
+                            <p class="highlight"><b>Tip para el oral:</b> Mencioná que el plan no se hace solo (requiere EDT y Riesgos), que buscás un equilibrio calidad/costo, y que una vez aprobado, entra en juego el QA para auditar.</p>
                         `
                     },
                     {
@@ -535,25 +536,73 @@
                 titulo: "Gestión IT",
                 temas: [
                     {
-                        titulo: "Sistemas, Empresa y Ecología",
+                        titulo: "El Sistema y el Sistema de Información",
                         contenido: `
-                            <p><b>Sistema:</b> Elementos interconectados para alcanzar un objetivo (Estructura y Comportamiento). Involucra Personas, Tecnologías y Procesos.</p>
-                            <p><b>Ecología de la Información:</b> Valores y Creencias, Utilización, Procesos de trabajo, Barreras, Sistemas y Tecnologías.</p>
+                            <p><b>Sistema (Pág. 3):</b> Conjunto de elementos interconectados para alcanzar un objetivo dado. Se compone de una <b>Estructura</b> y un <b>Comportamiento</b>.</p>
+                            <p><b>¿Qué significa hacer un estudio de Sistemas? (Pág. 4):</b> Es estudiar la estructura (elementos y su interconexión) y el comportamiento <b>sin hacer referencia a la naturaleza de los elementos que los componen</b>. Por eso el mismo enfoque sirve para el sistema circulatorio humano, un proceso de negocios o un proceso político.</p>
+                            <p><b>Sistema de Información (Pág. 5):</b> Especializa el objetivo. Se centra en el <b>Tratamiento de la Información</b>.</p>
+                            <p><b>SI en una organización (Pág. 8):</b> Es difícil de determinar su estructura y predecir su comportamiento. Involucra personas y procesos. Necesita técnicas y herramientas especiales.</p>
                         `
                     },
                     {
-                        titulo: "Actividad Directiva y Aplicaciones",
+                        titulo: "Procesos de Negocio y el SI (Personas, Tecnología, Procesos)",
                         contenido: `
-                            <p>Pirámide de Anthony (1965): Alta Dirección (Estratégico/Simulación), Gerencia (Táctico/Tendencias), Operaciones (Diario/Desvíos).</p>
-                            <p><b>ERP:</b> Cubre todas las operaciones. Módulos integrados. Un dato se incorpora una vez. Tiene costos ocultos (integración, capacitación, dependencia).</p>
+                            <p>La gestión IT se da en la intersección de tres elementos (Pág. 10): <b>Personas</b>, <b>Tecnologías</b> y <b>Procesos</b>.</p>
+                            <p>La tecnología permite (Pág. 11-12):</p>
+                            <ul>
+                                <li>Transformar procesos, reducir labor humana, facilitar simultaneidad.</li>
+                                <li>Vincular etapas, independencia geográfica, incrementar colaboración.</li>
+                                <li>Documentar sucesos, generar oportunidades estratégicas.</li>
+                                <li>Evitar intermediarios de información, potenciar el recurso humano.</li>
+                                <li>Mejorar la gestión y evaluación de indicadores.</li>
+                            </ul>
                         `
                     },
                     {
-                        titulo: "Estrategia IT y Outsourcing",
+                        titulo: "Ecología de la Información (El factor humano)",
                         contenido: `
-                            <p><b>Táctico:</b> Automatizar procesos, mejoras cuantitativas (centro de costos).</p>
-                            <p><b>Estratégico:</b> Dirigido al entorno, ventajas competitivas (centro de resultados).</p>
-                            <p><b>Outsourcing:</b> Transferir a un proveedor actividades del negocio. Claves: Tercerizar actividades seguras, investigar proveedor, flexibilidad, mantener personal de TI.</p>
+                            <p>No todo es tecnología; hay un ecosistema (Págs. 13-18) que debemos gestionar. Nos preocupamos por:</p>
+                            <ul>
+                                <li><b>Valores y Creencias:</b> Resistencia al cambio ("Nos quedamos sin trabajo!").</li>
+                                <li><b>Utilización:</b> La herramienta no es intuitiva ("No puedo usarla!").</li>
+                                <li><b>Procesos de trabajo:</b> El software no se adapta al proceso ("En lugar de agilizar...").</li>
+                                <li><b>Barreras:</b> Miedo o falta de capacidad ("Nunca voy a poder!!!").</li>
+                                <li><b>Sistemas y Tecnologías:</b> La moda tecnológica ("TECH...").</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        titulo: "Economía de la Información",
+                        contenido: `
+                            <p>Según las diapositivas (Págs. 19-20):</p>
+                            <ul>
+                                <li><b>Utilidad Marginal:</b> A medida que hay más cantidad de información, la utilidad que nos aporta cada unidad extra es menor (curva descendente).</li>
+                                <li><b>Costo Marginal:</b> A medida que hay más cantidad de información, el costo de procesarla, almacenarla y buscarla es mayor (curva ascendente).</li>
+                            </ul>
+                            <p><i>Conclusión:</i> Existe un punto óptimo de información. Acumular datos por acumular tiene un costo y deja de ser útil.</p>
+                        `
+                    },
+                    {
+                        titulo: "Actividad Directiva y Niveles",
+                        contenido: `
+                            <p>Pirámide de Anthony (1965):</p>
+                            <ul>
+                                <li><b>Alta Dirección:</b> Planificación Estratégica. Información externa, amplia, agregada. Simulación.</li>
+                                <li><b>Gerencia (Control):</b> Supervisión. Tendencias, desvíos.</li>
+                                <li><b>Operaciones:</b> Tareas diarias. Información interna, precisa, detallada.</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        titulo: "Aplicaciones Empresariales y Estrategia",
+                        contenido: `
+                            <p><b>ERP:</b> Cubre todas las operaciones de la compañía. Módulos integrados. Un dato se incorpora una vez. Tiene <b>costos ocultos</b> (dificultad de integración, desatención de capacitación, dependencia de consultores, "depresión post-ERP").</p>
+                            <p><b>Táctico vs Estratégico:</b></p>
+                            <ul>
+                                <li><b>Táctico:</b> Automatizar procesos, mejoras cuantitativas, centro de costos.</li>
+                                <li><b>Estratégico:</b> Dirigido al entorno, ventajas competitivas, centro de resultados.</li>
+                            </ul>
+                            <p><b>Outsourcing:</b> Transferir a un proveedor. Claves: Tercerizar actividades seguras, investigar proveedor, flexibilidad de renegociación, mantener personal de TI.</p>
                         `
                     }
                 ]
