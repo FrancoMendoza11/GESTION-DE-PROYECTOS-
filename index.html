@@ -376,7 +376,7 @@
                         `
                     },
                     { 
-                        titulo: "El Contexto de Negocios y las Leyes de Lehman", 
+                        titulo: "El Contexto de Negocios y las Leyes de Lehman (Básico)", 
                         contenido: `
                             <p>El término nació en los negocios con Michael Hammer y James Champy:</p>
                             <blockquote>
@@ -391,7 +391,7 @@
                         `
                     },
                     { 
-                        titulo: "Mantenibilidad y Soportabilidad", 
+                        titulo: "Mantenibilidad y Soportabilidad (Básico)", 
                         contenido: `
                             <ul>
                                 <li><b>Mantenibilidad (Qué posee):</b> Modularidad adecuada, patrones de diseño establecidos, convenciones de codificación bien definidas, código comprensible y auto-documentado, y sometido a revisiones de calidad.</li>
@@ -400,7 +400,7 @@
                         `
                     },
                     { 
-                        titulo: "Las 6 Actividades de Reingeniería", 
+                        titulo: "Las 6 Actividades de Reingeniería (Básico)", 
                         contenido: `
                             <ol>
                                 <li><b>Análisis de inventario:</b> Lista con descripción detallada de cada producto de software activo (funciones, impacto, fecha de lanzamiento, tamaño, importancia, mantenibilidad y soportabilidad).</li>
@@ -413,7 +413,7 @@
                         `
                     },
                     { 
-                        titulo: "Ingeniería Inversa (Detalle)", 
+                        titulo: "Ingeniería Inversa (Detalle Básico)", 
                         contenido: `
                             <p>Niveles de abstracción:</p>
                             <ul>
@@ -426,10 +426,110 @@
                         `
                     },
                     { 
-                        titulo: "¿Cuándo hacer Reingeniería?", 
+                        titulo: "¿Cuándo hacer Reingeniería? (Regla de Oro)", 
                         contenido: `
                             <p>Motivos (Pág. 28): Mantener una línea de código es más caro que desarrollarla de nuevo. El diseño con nuevas herramientas facilita el mantenimiento. Existe un prototipo (productividad superior).</p>
                             <p class="highlight">Regla de oro (Pág. 29): Se hace cuando el costo esperado de mantenimiento del producto re-ingenierizado por su vida útil + el costo propio del proceso es INFERIOR al costo esperado del mantenimiento del producto vigente por su vida útil.</p>
+                        `
+                    },
+                    {
+                        titulo: "[RESUMEN] 1. Leyes de Lehman y Sistemas Tipo E",
+                        contenido: `
+                            <p><b>Sistemas Tipo E:</b> Software que funciona en un contexto real y por eso debe evolucionar (ej.: sistema de facturación). Meir Lehman estudió estos sistemas y definió 4 leyes:</p>
+                            <div class="table-wrapper">
+                                <table>
+                                    <tr><th>Ley</th><th>Qué dice</th><th>Para recordar</th></tr>
+                                    <tr><td><b>Cambio continuo</b></td><td>Un sistema E debe adaptarse continuamente o se vuelve cada vez menos satisfactorio.</td><td>Si no cambia, queda viejo.</td></tr>
+                                    <tr><td><b>Complejidad creciente</b></td><td>Al evolucionar, su complejidad aumenta, salvo que se trabaje para mantenerla o reducirla.</td><td>Cada cambio lo enreda más.</td></tr>
+                                    <tr><td><b>Crecimiento continuo</b></td><td>Su funcionalidad debe crecer siempre para mantener satisfecho al cliente.</td><td>El cliente siempre pide más.</td></tr>
+                                    <tr><td><b>Calidad decreciente</b></td><td>Su calidad baja, salvo que se mantenga y adapte a los cambios del entorno.</td><td>Sin mantenimiento, empeora.</td></tr>
+                                </table>
+                            </div>
+                            <p><i>Conclusión: el mantenimiento no es opcional, y llega un punto en que mantener un sistema degradado cuesta más que rehacerlo → ahí aparece la reingeniería.</i></p>
+                        `
+                    },
+                    {
+                        titulo: "[RESUMEN] 2. Mantenibilidad y Soportabilidad (Definiciones)",
+                        contenido: `
+                            <ul>
+                                <li><b>Mantenibilidad:</b> Qué tan fácil es modificar el software. Un sistema mantenible tiene modularidad adecuada, usa patrones de diseño, sigue convenciones de codificación, tiene código comprensible y autodocumentado y pasa por revisiones de calidad.</li>
+                                <li><b>Soportabilidad:</b> Capacidad de dar soporte: todas las tareas necesarias para mantener funcionando bien un producto ya liberado.</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        titulo: "[RESUMEN] 3. Las 6 Actividades (Regla I-D-I-C-D-A)",
+                        contenido: `
+                            <p>Forman un CICLO: se pueden repetir y no siempre se hacen todas.</p>
+                            <p><b>Regla mnemotécnica:</b> <span class="highlight">I-D-I-C-D-A</span> (Inventario · Documentos · Ingeniería inversa · Código · Datos · Adelante)</p>
+                            <div class="table-wrapper">
+                                <table>
+                                    <tr><th>Actividad</th><th>Qué se hace</th></tr>
+                                    <tr><td><b>1. Análisis de inventario</b></td><td>Lista detallada de cada producto de software activo: funciones, impacto en otros sistemas, fecha de lanzamiento, tamaño, importancia y nivel de mantenibilidad/soportabilidad. Sirve para ELEGIR qué sistema reingenierizar.</td></tr>
+                                    <tr><td><b>2. Reestructuración de documentos</b></td><td>Revisar, reformular o crear la documentación, y mantenerla actualizada a medida que cambia el producto.</td></tr>
+                                    <tr><td><b>3. Ingeniería inversa</b></td><td>Recuperar el DISEÑO a partir del programa existente, con una representación de mayor nivel de abstracción.</td></tr>
+                                    <tr><td><b>4. Reestructuración de código</b></td><td>Reescribir el código (automática, semiautomática o manualmente) para que haga lo mismo o más con mejor calidad; puede pasarse a otro lenguaje. Luego se PRUEBA para conservar la funcionalidad original.</td></tr>
+                                    <tr><td><b>5. Reestructuración de datos</b></td><td>Analizar la arquitectura de datos y reformular los modelos: reorganizar atributos, identificar objetos, revisar las estructuras. Clave porque los datos influyen en todo el diseño.</td></tr>
+                                    <tr><td><b>6. Ingeniería hacia adelante</b></td><td>Usar el diseño recuperado para RECONSTRUIR el software: reimplementa lo que hacía, agrega funciones y mejora rendimiento y calidad.</td></tr>
+                                </table>
+                            </div>
+                        `
+                    },
+                    {
+                        titulo: "[RESUMEN] 4. Ingeniería Inversa (Detalle Profundo)",
+                        contenido: `
+                            <div class="table-wrapper">
+                                <table>
+                                    <tr><th>Concepto</th><th>Qué significa</th></tr>
+                                    <tr><td><b>Nivel de abstracción</b></td><td>Cuánto se aleja del código la representación (código → estructuras → diagramas → modelo del sistema). Más abstracción = mejor comprensión.</td></tr>
+                                    <tr><td><b>Completitud</b></td><td>Cuánto detalle se obtiene en un nivel de abstracción dado. Suele ser INVERSA a la abstracción: cuanto más abstracto, menos completo (ej.: sacar un UML correcto del código es difícil).</td></tr>
+                                </table>
+                            </div>
+                            <p><b>Proceso:</b></p>
+                            <ol>
+                                <li>Limpiar el código (solo construcciones válidas, más legible).</li>
+                                <li>Extraer componentes de diseño, modelos y representaciones.</li>
+                                <li>Refinar el diseño experimentando y observando cómo funciona.</li>
+                            </ol>
+                            <p><b>Tres tareas de comprensión:</b></p>
+                            <div class="table-wrapper">
+                                <table>
+                                    <tr><th>Comprender…</th><th>Qué se busca</th></tr>
+                                    <tr><td><b>Los datos</b></td><td>INTERNOS: clases de objetos, agrupar variables relacionadas, tipos abstractos (listas, pilas). EXTERNOS: entender los objetos del modelo de la base de datos.</td></tr>
+                                    <tr><td><b>El procesamiento</b></td><td>Abstracciones de lo que hace cada componente. Se escribe una "narrativa" por componente para reconocer patrones (ej.: "esto es un ABM", "esto valida datos"). Suele haber una parte que prepara datos, otra que procesa y otra que genera resultados.</td></tr>
+                                    <tr><td><b>La interfaz de usuario</b></td><td>¿Qué acciones básicas procesa (botones, ingresos)? ¿Qué responde y en qué casos? Se usan técnicas de modelado de comportamiento. Una UI nueva suele sumar objetos de interacción que antes no existían.</td></tr>
+                                </table>
+                            </div>
+                        `
+                    },
+                    {
+                        titulo: "[RESUMEN] 5. ¿Conviene rehacer algo que funciona?",
+                        contenido: `
+                            <p>Parece una locura, pero tiene sentido porque:</p>
+                            <ul>
+                                <li>Mantener un sistema viejo puede ser <b>VARIAS VECES más caro</b> que desarrollarlo de nuevo.</li>
+                                <li>Diseñar con herramientas y arquitectura nuevas facilita el mantenimiento futuro.</li>
+                                <li>El sistema actual funciona como <b>PROTOTIPO</b> → el desarrollo es más productivo.</li>
+                                <li>Al terminar se tiene una configuración completa (código, documentación y modelos al día).</li>
+                            </ul>
+                            <p class="formula">Conviene si: Costo de reingeniería + Mantenimiento del sistema nuevo (vida útil) < Mantenimiento del sistema actual (vida útil)</p>
+                            <p><b>Además:</b> Considerar la <b>VIGENCIA COMERCIAL</b>: si el producto no tiene futuro en el mercado, no vale la pena invertir.</p>
+                        `
+                    },
+                    {
+                        titulo: "[RESUMEN] Autoevaluación Reingeniería",
+                        contenido: `
+                            <ol>
+                                <li>¿Qué es un sistema tipo E? <br> <i>Software que funciona en un contexto real y debe evolucionar.</i></li>
+                                <li>Nombrá las 4 leyes de Lehman vistas. <br> <i>Cambio continuo, complejidad creciente, crecimiento continuo, calidad decreciente.</i></li>
+                                <li>¿Diferencia entre mantenibilidad y soportabilidad? <br> <i>Mantenibilidad: facilidad de modificar. Soportabilidad: capacidad de mantener funcionando un producto liberado.</i></li>
+                                <li>¿Qué proponen Hammer y Champy? <br> <i>Rediseñar radicalmente en vez de automatizar procesos viejos.</i></li>
+                                <li>¿Cuáles son las 6 actividades? <br> <i>Inventario, documentos, ingeniería inversa, código, datos, ingeniería hacia adelante (I-D-I-C-D-A).</i></li>
+                                <li>¿Para qué sirve el análisis de inventario? <br> <i>Para elegir qué sistema conviene reingenierizar.</i></li>
+                                <li>¿Qué relación hay entre abstracción y completitud? <br> <i>Inversa: más abstracto, menos completo.</i></li>
+                                <li>¿Cuáles son las 3 tareas de comprensión? <br> <i>Datos, procesamiento e interfaz de usuario.</i></li>
+                                <li>¿Cuándo conviene hacer reingeniería? <br> <i>Cuando reingeniería + mantenimiento nuevo < mantenimiento actual (y el producto tiene vigencia comercial).</i></li>
+                            </ol>
                         `
                     }
                 ]
@@ -677,6 +777,170 @@
                                 <li>¿Qué nivel CMMI tiene mejora continua? <br> <i>Nivel 5 – En optimización.</i></li>
                             </ol>
                         `
+                    },
+                    {
+                        titulo: "[RESUMEN] 1. Concepto y Calidad del Proceso (Detallado)",
+                        contenido: `
+                            <p><b>¿De quién es la culpa de la baja calidad?</b> Los clientes culpan a los desarrolladores (malas prácticas) y los desarrolladores a los clientes (plazos irracionales, cambios constantes). Respuesta: de <b>AMBOS</b>.</p>
+                            <p><b>Dilema de la calidad:</b> Baja calidad → nadie acepta el producto; calidad excesiva (perfección) → demasiado caro. Ambos quedan fuera del mercado → la clave es el <b>EQUILIBRIO</b>.</p>
+                            <p><b>Calidad = concordancia con las especificaciones.</b> En software se distinguen:</p>
+                            <ul>
+                                <li><b>Procesos:</b> Métodos/procedimientos aplicados durante la construcción (ej.: hacer documentación).</li>
+                                <li><b>Productos:</b> Entregables, versiones, documentos de especificación.</li>
+                                <li><b>Recursos:</b> Lo necesario para lo anterior, incluidos RR.HH. Por lo general no se pueden modificar.</li>
+                            </ul>
+                            <p><b>Calidad del proceso:</b> Un proceso eficaz da la infraestructura para un producto de calidad. Comprende: tecnologías (herramientas, entornos) · métodos y técnicas (guías) · comportamiento organizacional (RR.HH., equipos) · economía y gestión (evolución, fondeo, eficiencia).</p>
+                            <p>Requisitos: que produzcan los resultados esperados, se basen en una correcta definición y se mejoren según los objetivos del negocio → resultados <b>PREDECIBLES y MEDIBLES</b>.</p>
+                            <p><b>Ciclo de mejora del proceso (circular):</b> Definir (documentarlo bien para poder mejorarlo) → Ejecutar (monitorear para no apartarse) → Medir → Mejorar → vuelve a Definir. <i>Medir y mejorar van de la mano: sin medición no se puede cuantificar una mejora.</i></p>
+                        `
+                    },
+                    {
+                        titulo: "[RESUMEN] 2. Calidad del Producto (Los 8 Tipos - Detallado)",
+                        contenido: `
+                            <p>Se definen las características a evaluar y se vuelcan en el documento de "Requisitos de Calidad". Puntos de vista: pirámide de 3 niveles: calidad interna → calidad externa → calidad en uso. Cada uno puede verse como Requisitos, Estimado, Percibida o Real y objetiva. Los 8 tipos son:</p>
+                            <div class="table-wrapper">
+                                <table>
+                                    <tr><th>Tipo</th><th>Qué es</th></tr>
+                                    <tr><td>Calidad objetivo</td><td>Necesaria y suficiente; refleja las necesidades reales del usuario.</td></tr>
+                                    <tr><td>Req. de calidad externa</td><td>La determinada en los requisitos de calidad; visible externamente.</td></tr>
+                                    <tr><td>Req. de calidad interna</td><td>Especificada para los elementos que se construyen (arquitectura, estructura, interfaces).</td></tr>
+                                    <tr><td>Calidad interna</td><td>Cómo se diseña y construye (diseño y codificación).</td></tr>
+                                    <tr><td>Calidad externa estimada</td><td>La que se estima o predice para el producto.</td></tr>
+                                    <tr><td>Calidad externa</td><td>La del producto entregado, en entorno simulado, verificada con métricas.</td></tr>
+                                    <tr><td>Calidad de uso estimada</td><td>La previsible según la calidad interna y externa.</td></tr>
+                                    <tr><td>Calidad de uso</td><td>La percepción que se forma el usuario.</td></tr>
+                                </table>
+                            </div>
+                        `
+                    },
+                    {
+                        titulo: "[RESUMEN] 3. Características Evaluables (ISO 9126 Detallado)",
+                        contenido: `
+                            <p>Del concepto al indicador: 1) definir el concepto (ej.: facilidad de uso) → 2) identificar sus dimensiones (ej.: tiempo ocioso) → 3) definir indicadores/métricas (ej.: tiempo de respuesta).</p>
+                            <p>Las 6 características (todas incluyen además la subcaracterística <b>CONFORMIDAD</b> = cumplir estándares, normas y leyes):</p>
+                            <div class="table-wrapper">
+                                <table>
+                                    <tr><th>Característica</th><th>Definición</th><th>Subcaracterísticas</th></tr>
+                                    <tr><td><b>Funcionalidad</b></td><td>Brindar funciones que satisfagan las necesidades en las condiciones de uso.</td><td>Adecuación (funciones apropiadas) · Exactitud (resultados correctos a tiempo) · Interoperabilidad (con otros sistemas) · Seguridad (proteger datos)</td></tr>
+                                    <tr><td><b>Confiabilidad</b></td><td>Mantener el rendimiento usado en condiciones correctas.</td><td>Madurez (evitar fallas) · Tolerancia a fallas (ante defectos o mal uso) · Recuperabilidad (restablecer tras una falla)</td></tr>
+                                    <tr><td><b>Usabilidad</b></td><td>Ser entendido, usado y aprendido.</td><td>Comprensibilidad (entender qué hace) · Facilidad de aprendizaje · Operabilidad (operarlo y controlarlo) · Atracción</td></tr>
+                                    <tr><td><b>Eficiencia</b></td><td>Rendimiento adecuado según los recursos usados.</td><td>Comportamiento temporal (tiempos de respuesta) · Utilización de recursos (cantidad y tipo adecuados)</td></tr>
+                                    <tr><td><b>Mantenibilidad</b></td><td>Capacidad de ser modificado.</td><td>Analizabilidad (diagnosticar fallas) · Cambiabilidad (implementar modificaciones) · Estabilidad (sin efectos inesperados) · Facilidad de prueba (validar cambios)</td></tr>
+                                    <tr><td><b>Portabilidad</b></td><td>Ser transferido de un entorno a otro.</td><td>Adaptabilidad (a distintos ambientes) · Facilidad de instalación · Coexistencia (con otro software) · Reemplazabilidad (usarse en lugar de otro)</td></tr>
+                                </table>
+                            </div>
+                            <p><b>Regla mnemotécnica:</b> <span class="highlight">FU-CO-U-E-MA-PO</span> (Funcionalidad · Confiabilidad · Usabilidad · Eficiencia · Mantenibilidad · Portabilidad)</p>
+                            <p><b>Aplicación práctica (ej. UI):</b> Usabilidad: ¿es fácil de comprender?, ¿operaciones fáciles de iniciar?, ¿menos teclado/mouse?, ¿personalizable?, ¿la estética ayuda? · Eficiencia: ¿la distribución permite operar eficientemente?, ¿economía de movimientos? · Confiabilidad: ¿detecta datos fuera de rango?, ¿guía al camino correcto? Ponderando cada pregunta y valorando respuestas se obtiene una <b>métrica de calidad de la interfaz</b>.</p>
+                            <p><b>Calidad de modelos UML:</b> Semántica (cuánto representa el dominio) · Sintáctica (cuánto respeta las reglas) · Pragmática (cuánto ayuda a entender el problema).</p>
+                        `
+                    },
+                    {
+                        titulo: "[RESUMEN] 4. Los 3 Procesos de Gestión (Detallado)",
+                        contenido: `
+                            <p>Busca satisfacer los requerimientos de calidad establecidos. Tiene 3 procesos:</p>
+                            <div class="table-wrapper">
+                                <table>
+                                    <tr>
+                                        <th>Proceso</th>
+                                        <th>Objetivo</th>
+                                        <th>Entradas</th>
+                                        <th>Herramientas</th>
+                                        <th>Salidas</th>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Planificación</b></td>
+                                        <td>Identificar los requisitos de calidad y documentar su cumplimiento.</td>
+                                        <td>Documentos previos (inicio, EDT, riesgos) · Opinión de interesados · Entorno · Equilibrio de costos</td>
+                                        <td>Análisis de costos · Gráficos de control · Secuenciamiento de actividades · Diseño de experimentos, muestreo, brainstorming</td>
+                                        <td>Plan de gestión de calidad · Métricas de calidad · Check list</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Aseguramiento (QA)</b></td>
+                                        <td>Auditar requisitos y mediciones; evaluar la eficacia de las acciones de control.</td>
+                                        <td>Plan de gestión de calidad · Métricas y mediciones · Mediciones de rendimiento</td>
+                                        <td>Técnicas de control de calidad · Auditorías · Análisis de procesos</td>
+                                        <td>Actualización de estándares · Solicitudes de cambio · Actualización del plan</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Control de calidad</b></td>
+                                        <td>Monitorear y registrar resultados; identificar causas de la calidad deficiente.</td>
+                                        <td>Plan de calidad · Métricas/check list · Mediciones de rendimiento · Solicitudes de cambio · Estándares, entregables</td>
+                                        <td>Diagrama causa-efecto · Gráficos de control estadístico · Diagrama de Pareto · Revisión de cambios aprobados</td>
+                                        <td>Mediciones · Cambios y entregables validados · Actualización de estándares y plan · Solicitudes de cambio</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <p><b>Plan de Calidad mínimo (IEEE 730-2002):</b> propósito y alcance · estructura de gestión · métricas e instrumentos (check list) · revisiones de software · pruebas · controles de proveedores y riesgos.</p>
+                            <p><b>El aseguramiento comprende:</b> revisiones técnicas y estrategias de prueba · métodos y herramientas de construcción · control de lo producido · cumplimiento de estándares · medición y reporte · capacitación · gestión de proveedores.</p>
+                        `
+                    },
+                    {
+                        titulo: "[RESUMEN] 5. El Grupo de QA y Manejo de Errores",
+                        contenido: `
+                            <p><b>Responsabilidad del QA:</b> PLANEAR, SUPERVISAR, REGISTRAR, ANALIZAR y REPORTAR las actividades que garantizan la calidad. Debe: preparar un plan, revisar documentos/especificaciones, verificar pruebas, auditar el desarrollo y documentar.</p>
+                            <p><b>Metas:</b> calidad de requerimientos, de diseño y de código, y eficacia de las acciones de calidad.</p>
+                            <p><b>Métricas ejemplo:</b> n.º de cambios en requerimientos · requerimientos no trazables a diseño/código · patrones usados · % de componentes reutilizados · errores críticos en pruebas.</p>
+                            <p><b>¿Qué hacer con los errores?</b> Identificarlos y clasificarlos → rastrear su causa → clasificación de Pareto → atacar las causas de mayor peso.</p>
+                        `
+                    },
+                    {
+                        titulo: "[RESUMEN] 6. Herramientas: Pareto e Ishikawa (6M)",
+                        contenido: `
+                            <p><b>Diagrama de Pareto (ejemplo de clase: 100 errores):</b></p>
+                            <div class="table-wrapper">
+                                <table>
+                                    <tr><th>Causa</th><th>Errores</th><th>% acumulado</th></tr>
+                                    <tr><td>MIR – Mala interpretación de requisitos</td><td>35</td><td>35%</td></tr>
+                                    <tr><td>VEP – Violación de estándares de programación</td><td>25</td><td>60%</td></tr>
+                                    <tr><td>EI – Especificaciones incompletas</td><td>15</td><td>75%</td></tr>
+                                    <tr><td>DII – Documentación inexacta o incompleta</td><td>9</td><td>84%</td></tr>
+                                    <tr><td>DIE – Desviación intencional de especificaciones</td><td>8</td><td>92%</td></tr>
+                                    <tr><td>PIE – Pruebas incompletas o erróneas</td><td>5</td><td>97%</td></tr>
+                                    <tr><td>ECL – Error en la codificación</td><td>3</td><td>100%</td></tr>
+                                </table>
+                            </div>
+                            <p><i>Clave: 3 causas (MIR, VEP, EI) explican el 75% de los errores → pocas causas generan la mayoría de los problemas (regla 80/20); se atacan primero. El gráfico combina barras (errores por causa) y una curva (% acumulado).</i></p>
+                            <p><b>Diagrama causa-efecto (Ishikawa / espina de pescado):</b></p>
+                            <p>Pasos: 1) enunciar claro el efecto · 2) dibujar el eje hacia el problema · 3) identificar 3 a 6 espinas mayores (suelen ser las 6M) · 4) unirlas al eje · 5) agregar causas de 2.º y 3.er nivel · 6) evaluar impacto y concluir.</p>
+                            <p><b>Las 6M:</b> Medidas (exactitud, tiempo) · Materiales (IDE, reporter) · Mano de obra/RH (desarrolladores, DBA) · Medio (sueldos, ambiente) · Métodos (pertinencia, ejecución) · Máquinas (especificaciones, antigüedad).</p>
+                        `
+                    },
+                    {
+                        titulo: "[RESUMEN] 7. CMMI (Estructura y Niveles Detallados)",
+                        contenido: `
+                            <p><b>CMMI:</b> Conjunto de normas y procedimientos que da un MARCO PARA LA MEJORA de productos y procesos.</p>
+                            <p><b>Estructura:</b> Niveles de madurez → Áreas de proceso → cada área tiene Objetivos específicos (se logran con Prácticas específicas) y Objetivos genéricos (con Prácticas genéricas). Cada área contiene: propósito, notas introductorias, áreas relacionadas, objetivos específicos y genéricos, resumen de objetivos, prácticas específicas y genéricas; puede tener notas, ejemplos y bibliografía.</p>
+                            <p><b>4 categorías:</b> Gestión de procesos · Gestión del proyecto · Ingeniería · Soporte. <i>El nivel 1 no tiene áreas.</i></p>
+                            <div class="table-wrapper">
+                                <table>
+                                    <tr><th>Nivel</th><th>Características</th></tr>
+                                    <tr><td>1 – Inicial</td><td>Procesos ad-hoc y caóticos. El éxito depende de las <b>PERSONAS</b>, no de los procesos. Exceso de promesas, abandonos, no repiten éxitos; funciona pero excede presupuesto y plazos.</td></tr>
+                                    <tr><td>2 – Gestionado</td><td>Requisitos gestionados; procesos planificados (documentados), ejecutados, medidos y controlados. Resultados revisados con los implicados y contra estándares.</td></tr>
+                                    <tr><td>3 – Definido</td><td>Procesos especificados con más precisión y detalle. Ejecución <b>ESTANDARIZADA</b>.</td></tr>
+                                    <tr><td>4 – Cuantitativamente gestionado</td><td>Objetivos cuantitativos evaluados con técnicas estadísticas. Procesos cuantitativamente <b>PREDECIBLES</b>.</td></tr>
+                                    <tr><td>5 – En optimización</td><td><b>MEJORA CONTINUA</b> basada en la comprensión cuantitativa de las causas de variación. Mejoras incrementales e innovadoras; fuerza de trabajo alineada.</td></tr>
+                                </table>
+                            </div>
+                            <p><i>Truco: "I-G-D-C-O": Inicial → Gestionado → Definido → Cuantitativo → Optimización.</i></p>
+                        `
+                    },
+                    {
+                        titulo: "[RESUMEN] Autoevaluación Calidad (Detallada)",
+                        contenido: `
+                            <ol>
+                                <li>¿De quién es la culpa de la baja calidad? <br> <i>De clientes y desarrolladores.</i></li>
+                                <li>¿Cuál es el ciclo de mejora del proceso? <br> <i>Definir → Ejecutar → Medir → Mejorar.</i></li>
+                                <li>¿Cuáles son las 6 características evaluables? <br> <i>Funcionalidad, Confiabilidad, Usabilidad, Eficiencia, Mantenibilidad, Portabilidad (FU-CO-U-E-MA-PO).</i></li>
+                                <li>¿Qué subcaracterística comparten todas? <br> <i>Conformidad (cumplir estándares, normas y leyes).</i></li>
+                                <li>Tolerancia a fallas y recuperabilidad, ¿de qué característica son? <br> <i>Confiabilidad.</i></li>
+                                <li>¿Cuáles son los 3 procesos de gestión de la calidad? <br> <i>Planificación, Aseguramiento (QA) y Control.</i></li>
+                                <li>Pareto y causa-efecto, ¿en qué proceso se usan? <br> <i>Control de calidad.</i></li>
+                                <li>¿Qué muestra el Pareto del ejemplo? <br> <i>MIR, VEP y EI explican el 75% de los errores (80/20).</i></li>
+                                <li>¿Qué son las 6M? <br> <i>Medidas, Materiales, Mano de obra, Medio, Métodos, Máquinas.</i></li>
+                                <li>¿En qué nivel CMMI el éxito depende de las personas? <br> <i>Nivel 1 – Inicial.</i></li>
+                                <li>¿Qué nivel CMMI tiene mejora continua? <br> <i>Nivel 5 – En optimización.</i></li>
+                            </ol>
+                        `
                     }
                 ]
             },
@@ -862,7 +1126,7 @@
                 ]
             },
             equipos: {
-                titulo: "Gestión de Equipos: Tuckman y Belbin",
+                titulo: "Gestión de Equipos (Tuckman y Belbin)",
                 temas: [
                     {
                         titulo: "Modelo de Tuckman (Etapas de un Equipo)",
@@ -902,7 +1166,7 @@
                         `
                     },
                     {
-                        titulo: "Diferencias y Tips para el Examen",
+                        titulo: "Diferencias y Tips para el Examen (Tuckman vs Belbin)",
                         contenido: `
                             <div class="table-wrapper">
                                 <table>
@@ -917,6 +1181,142 @@
                                 <b>Importante:</b> En Belbin, una persona puede tener varios roles y estos pueden cambiar según las necesidades. No hay un rol superior a otro: lo importante es el <b>equilibrio</b>.<br><br>
                                 <b>Para memorizar:</b> Tuckman = cómo evoluciona el equipo. Belbin = qué aporta cada integrante.
                             </p>
+                        `
+                    },
+                    {
+                        titulo: "[RESUMEN] 1. Grupo vs. Equipo",
+                        contenido: `
+                            <div class="table-wrapper">
+                                <table>
+                                    <tr>
+                                        <th></th>
+                                        <th>Grupo</th>
+                                        <th>Equipo</th>
+                                        <th>Equipo de alto rendimiento</th>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Qué es</b></td>
+                                        <td>Personas que se unen porque comparten "algo" en común.</td>
+                                        <td>Personas interrelacionadas y organizadas cuyas habilidades permiten alcanzar el objetivo final.</td>
+                                        <td>Equipo que alcanzó los objetivos con <b>EXCELENCIA</b> en eficacia, eficiencia y satisfacción de miembros e interesados.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Cómo trabajan</b></td>
+                                        <td>Labor similar, mismo líder, mismo tipo de trabajo, pero <b>AUTÓNOMOS</b>: no dependen del trabajo de los demás; no miran la tarea en su totalidad.</td>
+                                        <td>Mentalidad abierta y dinámica, centrados en procesos según la misión, integrados y creativos; expresan opiniones y evitan discusiones que dividan.</td>
+                                        <td>Roles específicos y complementarios, gran compromiso, autonomía y recursos propios.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Comparten</b></td>
+                                        <td>"Algo" en común.</td>
+                                        <td>Misión, historia, metas y expectativas; buscan una acción común.</td>
+                                        <td>Además: símbolos y códigos en común.</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <p><b>Definición de equipo:</b> Grupo de personas con un claro propósito común, que representan distintas funciones o disciplinas, y cuya combinación de esfuerzos es necesaria para alcanzar los propósitos. <i>Objetivo de la materia: formar EQUIPOS, no solo grupos.</i></p>
+                            <p class="highlight"><b>Ojo: NO alcanza con…</b> que un grupo DECIDA trabajar junto · que haya buena voluntad o que sean AMIGOS · que cada uno haga bien SU trabajo.</p>
+                        `
+                    },
+                    {
+                        titulo: "[RESUMEN] 2. Factores que afectan el trabajo en equipo",
+                        contenido: `
+                            <div class="table-wrapper">
+                                <table>
+                                    <tr><th>Favorecen</th><th>Dificultan</th></tr>
+                                    <tr><td>Objetivos comunes</td><td>Objetivos incompatibles</td></tr>
+                                    <tr><td>Organización definida: QUÉ (metas), CÓMO (procedimientos), QUIÉN (funciones)</td><td>Ausencia de roles, funciones, procedimientos y metas</td></tr>
+                                    <tr><td>Roles y tareas aceptados</td><td>Falta de aceptación e incumplimiento de roles y tareas</td></tr>
+                                    <tr><td>Comunicación clara y fluida</td><td>Comunicación disfuncional</td></tr>
+                                    <tr><td>Normas claramente definidas</td><td>Carencia de normas</td></tr>
+                                    <tr><td>Coordinación y buenas relaciones interpersonales</td><td>Buenas relaciones pero agrupamiento inadecuado de personas</td></tr>
+                                    <tr><td>Colaboración espontánea y ayuda mutua</td><td>Falta de colaboración</td></tr>
+                                    <tr><td>Afinidad e identificación con el grupo</td><td>No compartir creencias y actitudes del grupo</td></tr>
+                                </table>
+                            </div>
+                            <p><b>Beneficios del trabajo en equipo:</b> Compartir puntos de vista · Aumentar la calidad del trabajo individual · Fortalecer el compromiso con la organización · Potenciar los talentos · Generar innovación.</p>
+                        `
+                    },
+                    {
+                        titulo: "[RESUMEN] 3. Belbin + Tuckman: Roles y Riesgos por Etapa",
+                        contenido: `
+                            <p>Tuckman estudió la dinámica de grupos; Belbin, el comportamiento. Combinados responden: ¿qué roles se necesitan en cada etapa y qué riesgos hay?</p>
+                            <ul>
+                                <li><b>Forming:</b> Se necesitan conocer fortalezas y debilidades. Un buen <b>Coordinador</b> une al equipo. <b>Riesgo:</b> No querer abordar temas difíciles por temor al conflicto.</li>
+                                <li><b>Storming:</b> Se necesitan <b>Cerebros</b> (ideas) y <b>Monitores</b> (objetividad). <b>Cohesionadores</b> para construir relaciones e <b>Impulsores</b> para llevar el debate a resultados. <b>Riesgo:</b> Demasiados Cerebros compitiendo o Impulsores agresivos.</li>
+                                <li><b>Norming:</b> Claridad de quién hace qué. <b>Coordinadores</b> facilitan decisiones; <b>Implementadores</b> planifican procesos; <b>Investigadores</b> buscan info externa. <b>Riesgo:</b> Cerebros que alteren el funcionamiento con ideas nuevas cuando el trabajo ya está en marcha.</li>
+                                <li><b>Performing:</b> Alto rendimiento, el equipo entiende su propósito, es autónomo y resuelve desacuerdos positivamente.</li>
+                                <li><b>Adjourning:</b> Evaluaciones de observadores para ver si cada uno tiene clara su imagen de roles.</li>
+                            </ul>
+                            <p class="highlight"><b>El salto hacia el desempeño:</b> Muchos equipos se estancan en Forming y Storming. El lenguaje de Belbin <b>ACELERA</b> el paso de una etapa a la siguiente y es un gran regulador que aporta cohesión.</p>
+                        `
+                    },
+                    {
+                        titulo: "[RESUMEN] 4. Equipo de Alto Rendimiento y las 5C",
+                        contenido: `
+                            <p><b>Características:</b> Máximo rendimiento, foco en objetivos, trabajo en equipo/disciplina/autosuperación como cultura, integrantes autónomos, el líder solo gestiona lo estratégico, símbolos y códigos comunes, plena identificación, autoexigente, mejora continua.</p>
+                            <p><b>Factores efectivos:</b> Metas claras, comunicación, espíritu colectivo por sobre el individualismo.</p>
+                            <p><b>Las 5C de Meza Canales (en orden de construcción):</b></p>
+                            <ol>
+                                <li>Confianza (cada uno confía en el buen hacer de los demás)</li>
+                                <li>Consenso (sin confianza no hay consenso)</li>
+                                <li>Compromiso (sin consenso no hay compromiso)</li>
+                                <li>Colaboración</li>
+                                <li>Comunicación (fluye durante TODO el proceso)</li>
+                            </ol>
+                            <p><b>Las 5C de Tom Peters:</b></p>
+                            <ol>
+                                <li>Confianza</li>
+                                <li>Coordinación (organización de tiempos y tareas)</li>
+                                <li>Compromiso (ponen todo su empeño)</li>
+                                <li>Complemento (cada uno domina algo y se complementan)</li>
+                                <li>Comunicación (para comprender, analizar, realizar y decidir)</li>
+                            </ol>
+                            <p><i>Ojo: Ambas listas comparten Confianza, Compromiso y Comunicación. Meza Canales suma Consenso y Colaboración (en orden); Peters suma Coordinación y Complemento.</i></p>
+                        `
+                    },
+                    {
+                        titulo: "[RESUMEN] 5. ¿Cómo formar un Equipo de Alto Rendimiento?",
+                        contenido: `
+                            <ul>
+                                <li><b>Selección de personas:</b> Analizar habilidades, conocimientos y experiencia; buscar espíritu de colaboración. No hacen falta "los mejores" sino una <b>BUENA COMBINACIÓN</b>.</li>
+                                <li><b>Definición de objetivos:</b> Objetivos comunes.</li>
+                                <li><b>Asignación de roles y normas:</b> Roles explícitos para actuar de forma eficiente.</li>
+                                <li><b>Comunicación:</b> Diálogo fluido y claro; instancias para que todos se expresen.</li>
+                                <li><b>Liderazgo:</b> Formar líderes para que el equipo trascienda; desarrollar la visión de negocio.</li>
+                                <li><b>Cohesión:</b> Que los miembros se sientan atraídos e identificados con el proyecto.</li>
+                                <li><b>Interdependencia:</b> Los miembros se necesitan; cada uno aprende de los demás.</li>
+                            </ul>
+                            <p class="highlight"><b>El líder:</b> Para poner a cada persona donde usa sus talentos necesita conocer al <b>EQUIPO</b>, la <b>SITUACIÓN</b> y al <b>JUGADOR</b>. Ayudarlos a estar en su zona de comodidad, pero nunca fuera de su zona de talentos.</p>
+                        `
+                    },
+                    {
+                        titulo: "[RESUMEN] 6. Reflexiones Finales y Dinámicas",
+                        contenido: `
+                            <ul>
+                                <li>La formación de equipos de alto rendimiento no se da por arte de magia: es una actividad continua que mejora con la práctica.</li>
+                                <li>"El equipo ideal no existe": formemos equipos posibles.</li>
+                                <li>Los logros de un equipo son el resultado del esfuerzo combinado de cada individuo.</li>
+                                <li><b>Rafael Echeverría:</b> La clave del desempeño está en la dinámica de relaciones entre los miembros. Lo importante es cómo se comportan EN CONJUNTO a lo largo del tiempo.</li>
+                                <li><b>Ubuntu:</b> "Yo soy porque todos somos". Representa la cooperación y la solidaridad. (Ejemplo: Niños africanos que corrieron juntos para compartir la fruta).</li>
+                            </ul>
+                            <p><b>Dinámicas de clase:</b> Supervivencia en la isla (elegir 5 de 20 objetos y justificar) · La torre de papel (construir la torre más alta sin cinta ni tijeras).</p>
+                        `
+                    },
+                    {
+                        titulo: "[RESUMEN] Autoevaluación Equipos",
+                        contenido: `
+                            <ol>
+                                <li>¿Diferencia clave entre grupo y equipo? <br> <i>En el grupo cada uno es autónomo; el equipo comparte misión y metas y se necesitan entre sí.</i></li>
+                                <li>¿Alcanza con ser amigos para ser equipo? <br> <i>No (tampoco alcanza con decidirlo ni con que cada uno haga bien lo suyo).</i></li>
+                                <li>¿Cuáles son los 3 grupos de roles de Belbin? <br> <i>Sociales, mentales y de acción (3 roles cada uno).</i></li>
+                                <li>¿Qué rol aporta las ideas y cuál las critica? <br> <i>Cerebro y Monitor evaluador.</i></li>
+                                <li>¿Cuáles son las 5 fases de Tuckman? <br> <i>Forming, Storming, Norming, Performing, Adjourning.</i></li>
+                                <li>¿Qué hace el líder en cada fase? <br> <i>Dirige, coach, facilita, delega.</i></li>
+                                <li>¿Qué fase se agregó después y cuándo? <br> <i>Adjourning (disolución), en 1977.</i></li>
+                                <li>¿En qué orden se construyen las 5C de Meza Canales? <br> <i>Confianza -> Consenso -> Compromiso -> Colaboración; la Comunicación fluye en todas.</i></li>
+                                <li>¿Qué 3 cosas debe conocer el líder? <br> <i>El equipo, la situación y al jugador.</i></li>
+                            </ol>
                         `
                     }
                 ]
@@ -945,10 +1345,10 @@
                 ]
             },
             costos: {
-                titulo: "Gestión de Costos",
+                titulo: "Gestión de Costos (Completo)",
                 temas: [
                     {
-                        titulo: "Definición y Estimación",
+                        titulo: "Definición y Estimación (Básico)",
                         contenido: `
                             <p><b>Costo:</b> Desembolso aplicable a la creación/explotación de valor.</p>
                             <p><b>Bottom-up:</b> Evalúa detalle de cada unidad de la EDT y agrega hacia arriba.</p>
@@ -956,11 +1356,138 @@
                         `
                     },
                     {
-                        titulo: "OTC y Punto de Equilibrio",
+                        titulo: "OTC y Punto de Equilibrio (Básico)",
                         contenido: `
                             <p class="formula">OTC = Inversión Inicial + (Costo periódico recurrente × Cantidad de períodos de vida útil)</p>
                             <p><b>Amortizar:</b> Disminución proporcional del valor del activo por vida útil.</p>
                             <p class="formula">Punto de Equilibrio = Costos Fijos Totales / Contribución Marginal Unitaria</p>
+                        `
+                    },
+                    {
+                        titulo: "[RESUMEN] 1. Definición y Tipificación (Pe-Fu-Na-I-Va)",
+                        contenido: `
+                            <p><b>Costo:</b> Desembolso presente, pasado o futuro, real o virtual, aplicable a la creación o explotación de valor. Se clasifican en 5 criterios: <b>Período, Función, Naturaleza, Imputación y Variabilidad</b>.</p>
+                            
+                            <h4 style="margin-top: 15px; color: var(--accent-color);">Según el Período</h4>
+                            <div class="table-wrapper">
+                                <table>
+                                    <tr><th>Tipo</th><th>Qué significa</th><th>Ejemplo</th></tr>
+                                    <tr><td>Corrientes</td><td>Se incurren en el mismo ciclo en que se asignan.</td><td>Pago de un producto que se usa en el período.</td></tr>
+                                    <tr><td>Previstos</td><td>Se asignan ANTES de que se produzcan.</td><td>Cargas sociales.</td></tr>
+                                    <tr><td>Diferidos</td><td>Se producen ANTES de su asignación.</td><td>Estudios previos.</td></tr>
+                                    <tr><td>Hundidos</td><td>Ya se realizaron previamente.</td><td>Compra de una plataforma de desarrollo.</td></tr>
+                                </table>
+                            </div>
+                            <p><i>Ojo: Previsto = asigna antes de ocurrir; Diferido = ocurre antes de asignar; Hundido = ya se gastó.</i></p>
+
+                            <h4 style="margin-top: 15px; color: var(--accent-color);">Según la Función</h4>
+                            <ul>
+                                <li><b>Producción:</b> Para elaborar el bien (horas de Google Maps).</li>
+                                <li><b>Servicios:</b> AYUDAN a la elaboración (consultor).</li>
+                                <li><b>Comercialización:</b> Venta y distribución (publicidad).</li>
+                                <li><b>Administración:</b> Apoyo administrativo (contabilidad).</li>
+                                <li><b>Financieros:</b> Provisión de capital (intereses).</li>
+                            </ul>
+
+                            <h4 style="margin-top: 15px; color: var(--accent-color);">Según la Naturaleza</h4>
+                            <ul>
+                                <li><b>Materias primas:</b> Elementos del bien en producción.</li>
+                                <li><b>Sueldos y jornales:</b> Erogaciones de personal.</li>
+                                <li><b>Cargas:</b> Seguridad social, energía, depreciación, seguros.</li>
+                            </ul>
+
+                            <h4 style="margin-top: 15px; color: var(--accent-color);">Según la Imputación</h4>
+                            <ul>
+                                <li><b>Directos:</b> Asignación directa al bien/servicio.</li>
+                                <li><b>Indirectos:</b> Asignación mediante un criterio de distribución.</li>
+                            </ul>
+
+                            <h4 style="margin-top: 15px; color: var(--accent-color);">Según la Variabilidad</h4>
+                            <ul>
+                                <li><b>Variables:</b> Varían según la cantidad producida.</li>
+                                <li><b>Fijos:</b> Independientes de la cantidad.</li>
+                                <li><b>Semifijos:</b> Fijos en un rango de volumen, varían "en escalones".</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        titulo: "[RESUMEN] 2. Asignación (Centro de Costo y Amortización)",
+                        contenido: `
+                            <p><b>Centro de costo:</b> Recibe erogaciones y las distribuye a los bienes/servicios (o a otro centro) según una base de distribución.</p>
+                            <p><b>Ejemplo de la clase (Operaciones):</b> Recibe $41.000 (Proveedor Nube 1 $15.000 variable + Nube 2 $18.000 variable + Comunicaciones $8.000 fijo). Los variables se reparten por cantidad de logon; los fijos en partes iguales por aplicación.</p>
+                            <p class="formula">OTC = Inversión Inicial + (Costo periódico recurrente × Cantidad de períodos de vida útil)</p>
+                            <p><b>Activo:</b> Lo que la organización posee y aplica a sus operaciones. Pasa a formar parte del activo al adquirirlo.</p>
+                            <p><b>Amortización por período</b> = Valor del bien ÷ Vida útil.</p>
+                            <p><i>Ejemplo: Servidor u$s 10.000 / 4 años = u$s 2.500 por año de costo por amortización.</i></p>
+                        `
+                    },
+                    {
+                        titulo: "[RESUMEN] 3. Estimación (Bottom-up vs Top-down)",
+                        contenido: `
+                            <div class="table-wrapper">
+                                <table>
+                                    <tr><th></th><th>Bottom up</th><th>Top down</th></tr>
+                                    <tr><td><b>Cómo funciona</b></td><td>Recoge datos detallados de cada unidad de la EDT y los suma hacia arriba.</td><td>También llamado Paramétrico. Deja de lado las tareas y usa información histórica aplicada a las características del proyecto.</td></tr>
+                                    <tr><td><b>Se basa en</b></td><td>El detalle de las tareas (EDT).</td><td>Datos históricos y métricas.</td></tr>
+                                    <tr><td><b>Palabra clave</b></td><td>Agregación / detalle.</td><td>Paramétrico / historia.</td></tr>
+                                    <tr><td><b>Ejemplo de la clase</b></td><td>Planilla por tarea: 1.1 Armado de equipo -> 1.1.1 Idear perfil, etc., con horas por perfil (Senior, Semi, Junior).</td><td>Proyecto medido en Puntos de Función (PF = 297). Horas por PF × PF × factor de reuso × valor hora.</td></tr>
+                                </table>
+                            </div>
+                            <p><i>¿Cuál es mejor? Depende. Lo recomendable es hacer ambos siempre que se pueda y compararlos.</i></p>
+                        `
+                    },
+                    {
+                        titulo: "[RESUMEN] 4. Control de Costos (Desvíos y Avance)",
+                        contenido: `
+                            <p><b>Definición:</b> Comparar el costo estimado al inicio con el costo real conocido al final o al avanzar una etapa.</p>
+                            <p><b>Clave:</b> Debe haber relación entre ejecución del presupuesto y avance. Si nos quedamos sin recursos, <b>identificar la naturaleza de la desviación</b>:</p>
+                            <ul>
+                                <li><b>Ejecución deficiente:</b> Revisar ejecución, capacitar, revisar desvíos por work package.</li>
+                                <li><b>Estimación deficiente:</b> Revisar procedimiento (combinar Top down y Bottom up).</li>
+                                <li><b>Exógenos:</b> Factores externos no controlables (revisar identificación de riesgos).</li>
+                            </ul>
+                            <p><b>Medir el avance:</b></p>
+                            <ul>
+                                <li><b>Regla 0/100:</b> Cada work package cuenta 0% hasta terminar y 100% al terminar.</li>
+                                <li><b>Regla fija (ej. 30/70):</b> Asignar un % al inicio y el resto al finalizar.</li>
+                            </ul>
+                            <p><b>Ejemplo:</b> Devengado = Costo estimado × % avance. Total devengado: $51.000. Total gastado: $56.000. Desvío = (56.000 - 51.000) / 51.000 ≈ 9,8% (gastamos más de lo avanzado).</p>
+                            <p><b>Proyecto trabado:</b> Ajustar plan a la realidad, reducir alcance/tareas y/o ajustar presupuesto.</p>
+                        `
+                    },
+                    {
+                        titulo: "[RESUMEN] 5. Análisis de Costos (Toma de Decisiones)",
+                        contenido: `
+                            <p>Solo se contemplan costos variables y fijos.</p>
+                            <ul>
+                                <li><b>Precio de Venta Neto:</b> Valor unitario neto de financiación.</li>
+                                <li><b>Costos Variables:</b> Dependen del volumen.</li>
+                                <li><b>Contribución Marginal (CM):</b> Lo que queda por unidad luego de descontar los costos variables.</li>
+                                <li><b>Costos Fijos Unitarios:</b> Parte de los fijos distribuida a una unidad.</li>
+                                <li><b>Ganancia:</b> Lo que queda después de restar los costos fijos.</li>
+                            </ul>
+                            <p class="formula">CM = Precio de Venta Neto − Costos Variables</p>
+                            <p class="formula">Ganancia = Contribución Marginal − Costos Fijos</p>
+                            <p><b>¡Cuidado!</b> No descontinuar un producto que no da ganancia si su CM es positiva: ayuda a cubrir los costos fijos que seguirían existiendo.</p>
+                            <p class="formula">Punto de Equilibrio = Costos Fijos Totales ÷ Contribución Marginal Unitaria</p>
+                            <p><i>Ejemplo: Precio $100, CV $60 (CM $40). Costos Fijos Totales $20.000. Punto de Equilibrio = 20.000 / 40 = 500 unidades.</i></p>
+                        `
+                    },
+                    {
+                        titulo: "[RESUMEN] Autoevaluación Costos",
+                        contenido: `
+                            <ol>
+                                <li>¿Qué diferencia hay entre un costo previsto y uno diferido? <br> <i>Previsto: se asigna antes de producirse. Diferido: se produce antes de asignarse.</i></li>
+                                <li>La compra previa de una plataforma de desarrollo, ¿qué tipo de costo es según el período? <br> <i>Hundido.</i></li>
+                                <li>Un consultor de una tecnología, ¿qué costo es según la función? <br> <i>De servicios (ayuda a la elaboración).</i></li>
+                                <li>¿Qué es un costo semifijo? <br> <i>Se comporta fijo dentro de un rango de volumen y cambia en escalones.</i></li>
+                                <li>¿Cómo se calcula el costo total de uso? <br> <i>Inversión inicial + (costo periódico recurrente × períodos de vida útil).</i></li>
+                                <li>¿Cuál es la diferencia entre Bottom up y Top down? <br> <i>Bottom up suma el detalle de cada paquete de la EDT; Top down (paramétrico) usa datos históricos.</i></li>
+                                <li>Si hay desvío por factores externos, ¿qué se revisa? <br> <i>El procedimiento de identificación de riesgos.</i></li>
+                                <li>¿Qué es la regla 0/100? <br> <i>Un work package cuenta 0% hasta terminar y 100% cuando termina.</i></li>
+                                <li>¿Por qué no conviene eliminar un producto que no da ganancia? <br> <i>Porque si su CM es positiva, ayuda a cubrir costos fijos que igual seguirían.</i></li>
+                                <li>¿Fórmula del punto de equilibrio? <br> <i>Costos fijos totales ÷ contribución marginal unitaria.</i></li>
+                            </ol>
                         `
                     }
                 ]
